@@ -10,13 +10,8 @@ A web platform for creating and sharing trips.
 ## Table of Contents
 
 * [Description](#description)
-* [Usage](#usage)
 * [License](#license)
 * [Credit](#credit)
-
-## Usage
-
-n/a
 
 ## License
 

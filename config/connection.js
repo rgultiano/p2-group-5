@@ -3,8 +3,8 @@ require('dotenv').config();
 
 let sequelize;
 
-if (process.env.JAWSDB_URL) {
-    // if there is a JAWSDB_URL parameter then app currently hosted
+if (process.env.CLEARDB_DATABASE_URL) {
+    // if there is a CLEARDB_DATABASE_URL parameter then app currently hosted on heroku
     sequelize = new Sequelize(process.env.CLEARDB_DATABASE_URL);
 } else {
     // otherwise launch off local vars

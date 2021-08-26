@@ -5,7 +5,7 @@ let sequelize;
 
 if (process.env.JAWSDB_URL) {
     // if there is a JAWSDB_URL parameter then app currently hosted
-    sequelize = new Sequelize(process.env.JAWSDB_URL);
+    sequelize = new Sequelize(process.env.CLEARDB_DATABASE_URL);
 } else {
     // otherwise launch off local vars
     sequelize = new Sequelize(

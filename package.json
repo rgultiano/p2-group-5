@@ -4,7 +4,9 @@
   "description": "A trip curating web app, with a social element ",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "build-css": "tailwindcss build src/styles.css -o public/css/tailwind.css"
   },
   "repository": {
     "type": "git",
@@ -17,12 +19,23 @@
   },
   "homepage": "https://github.com/rgultiano/p2-group-5#readme",
   "dependencies": {
+    "@tailwindcss/forms": "^0.3.3",
+    "@tailwindcss/typography": "^0.4.1",
     "bcrypt": "^5.0.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.3",
     "express-session": "^1.17.2",
+    "fontawesome": "^5.6.3",
+    "jshint": "^2.13.1",
+    "material-design-icons": "^3.0.1",
     "mysql2": "^2.3.0",
     "sequelize": "^6.6.5"
-  }
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.3.3",
+    "postcss": "^8.3.6",
+    "tailwindcss": "^2.2.8"
+  },
+  "keywords": []
 }

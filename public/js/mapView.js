@@ -1,5 +1,4 @@
 require('dotenv').config()
-const geoCodingApi = require("./api/geoApi");
 
 function geoApi(location) {
     var api_key = process.env.GOOGLE_API
@@ -8,9 +7,14 @@ function geoApi(location) {
     fetch(url)
     .then(response => response.json())
     .then(data => output = data)
-    .then(() => console.log(output));
+    .then(() => pushInitLocation(output));
   
-  }
+}
+
+function pushInitLocation(value) {
+    value = value['results'][0]['geometry']['location']
+    initMap(value)
+}
 
 let map;
     

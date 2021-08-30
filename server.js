@@ -4,6 +4,7 @@ const sequelize = require('./config/connection');
 const routes = require('./controllers');
 const exphbs = require('express-handlebars');
 const layouts = require('handlebars-layouts');
+const {withAuth, checkAuthenticated} = require('../utils/auth');
 
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -34,6 +35,9 @@ const sess = {
 
 // Add express-session and store as Express.js middleware
 app.use(session(sess));
+
+// Check if user is authenticated and if so pass session details to local vars
+app.use(checkAuthenticated);
 
 // Set Handlebars as the default template engine.
 app.engine('handlebars', hbs.engine);

@@ -29,6 +29,8 @@
     "express-handlebars": "^5.3.3",
     "express-session": "^1.17.2",
     "fontawesome": "^5.6.3",
+    "handlebars-layout": "^0.1.4",
+    "handlebars-layouts": "^3.1.4",
     "jshint": "^2.13.1",
     "material-design-icons": "^3.0.1",
     "mysql2": "^2.3.0",

@@ -24,11 +24,6 @@ User.init(
       allowNull: false,
       defaultValue: "U001",
     },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: "*******",
-    },
     active: { type: DataTypes.BOOLEAN, defaultValue: true },
     email: { type: DataTypes.STRING, allowNull: false },
     created_dt: {

@@ -2,12 +2,27 @@ const path = require('path');
 const express = require('express');
 const sequelize = require('./config/connection');
 const routes = require('./controllers');
+const exphbs = require('express-handlebars');
+const layouts = require('handlebars-layouts');
+
+
+//initiate handlebars for express
+const hbs = exphbs.create({
+});
+
+//Register handlebar-layouts helpers on handlebars
+hbs.handlebars.registerHelper(layouts(hbs.handlebars));
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+
+// Set Handlebars as the default template engine.
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 
 // default *GET /* to public/index.html
 app.get('/', function (req, res) {

@@ -28,8 +28,7 @@ UserAuth.init(
       allowNull: false,
       validate:{
         isIn: {
-            args: [['password']],
-            msg: "Must be English or Chinese"
+            args: [['email']],
           }
       }
     },
@@ -43,14 +42,14 @@ UserAuth.init(
     hooks: {
       beforeCreate: async (userAuth) => {
         if(userAuth.password){
-            userAuth.password = await bcrypt.hash(newUserData.password, 10);
-            return newUserData;
+            userAuth.password = await bcrypt.hash(userAuth.password, 10);
+            return userAuth;
         }
       },
       beforeUpdate: async (userAuth) => {
         if(userAuth.password){
-            userAuth.password = await bcrypt.hash(newUserData.password, 10);
-            return newUserData;
+            userAuth.password = await bcrypt.hash(userAuth.password, 10);
+            return userAuth;
         }
       },
     },

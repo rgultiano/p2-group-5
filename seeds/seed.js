@@ -1,4 +1,5 @@
 const seedUsers = require("./user-seeds");
+const seedUserAuths = require("./user-auth-seeds");
 const seedTrips = require("./trip-seeds.js");
 const seedBookings = require("./booking-seeds.js");
 
@@ -9,6 +10,8 @@ const seedAll = async () => {
   console.log("\n----- DATABASE SYNCED -----\n");
   await seedUsers();
   console.log("\n----- USERS SEEDED -----\n");
+  await seedUserAuths();
+  console.log("\n----- USERS AUTH SEEDED -----\n");
 
   await seedTrips();
   console.log("\n----- TRIPS SEEDED -----\n");

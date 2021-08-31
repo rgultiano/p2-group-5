@@ -43,11 +43,6 @@ app.use(checkAuthenticated);
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-// default *GET /* to public/index.html
-app.get('/',withAuth, function (req, res) {
-    res.sendFile(__dirname + '/public/index.html'); 
-});
-
 // Serve up the public folder on the root
 app.use(express.static(path.join(__dirname, 'public')));
 

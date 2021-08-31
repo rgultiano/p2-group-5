@@ -53,5 +53,8 @@
         </main>
     </div>
     {{{block "scripts"}}}
+    {{#if isLoggedIn}}
+        <script src="/js/logout.js"></script>
+    {{/if}}
 </body>
 </html>

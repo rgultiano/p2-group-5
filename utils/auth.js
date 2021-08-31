@@ -3,7 +3,7 @@ module.exports = {
 
       // check if session exists then set local vars for HandleBars
       if (req.session && req.session.user_id && req.session.logged_in){
-          res.isLoggedIn = true;
+          res.locals.isLoggedIn = true;
           res.locals.session = res.session;
       } else {
           res.isLoggedIn = false;

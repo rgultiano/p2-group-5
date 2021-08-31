@@ -4,7 +4,7 @@ const sequelize = require('./config/connection');
 const routes = require('./controllers');
 const exphbs = require('express-handlebars');
 const layouts = require('handlebars-layouts');
-const {withAuth, checkAuthenticated} = require('./utils/auth');
+const {checkAuthenticated} = require('./utils/auth');
 
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -42,11 +42,6 @@ app.use(checkAuthenticated);
 // Set Handlebars as the default template engine.
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
-
-// default *GET /* to public/index.html
-app.get('/',withAuth, function (req, res) {
-    res.sendFile(__dirname + '/public/index.html'); 
-});
 
 // Serve up the public folder on the root
 app.use(express.static(path.join(__dirname, 'public')));

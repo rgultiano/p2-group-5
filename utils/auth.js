@@ -15,7 +15,8 @@ module.exports = {
   },
   withAuth: (req, res, next) => {
     if (!req.session.logged_in) {
-      res.redirect('/login');
+      const uriReferrer = `?return_location=${encodeURIComponent(req.url)}`;
+      res.redirect(`/login${uriReferrer}`);
     } else {
       next();
     }

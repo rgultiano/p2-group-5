@@ -44,7 +44,7 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 // default *GET /* to public/index.html
-app.get('/', function (req, res) {
+app.get('/',withAuth, function (req, res) {
     res.sendFile(__dirname + '/public/index.html'); 
 });
 

@@ -1,8 +1,10 @@
-const router = require("express").Router();
-const apiRoutes = require("./api");
+const router = require('express').Router();
+const apiRoutes = require('./api');
 
-router.get("/login", (req, res) => {
-  res.render("login");
+// render the login page
+router.get('/login', (req, res) => {
+
+  res.render('login');
 });
 
 router.get("/signup", (req, res) => {

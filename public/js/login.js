@@ -15,8 +15,10 @@ const loginFormHandler = async (event) => {
       });
   
       if (response.ok) {
-        document.location.replace('/');
-        alert('login successful');
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        const redirect_uri = urlParams.get('return_location') ? urlParams.get('return_location') : '/';
+        document.location.replace(redirect_uri);
       } else {
         if(response.status == 401){
             const {message} = await response.json();

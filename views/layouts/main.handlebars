@@ -19,12 +19,18 @@
                 </header>
 
                 <div class="ml-10 pl-5 sm:mt-5"><!--login sign up buttons-->
-                    <button class="text-sm sm:text-base bg-white border-red-400 text-red-400 rounded-lg py-2 px-4 mr-5 mt-3 hover:bg-red-400 hover:text-white hover:duration-500">
-                        <a href="#">Log in</a>
+                    {{#if isLoggedIn}}
+                    <button class="logout-link text-sm sm:text-base bg-white border-red-400 text-red-400 rounded-lg py-2 px-4 mr-5 mt-3 hover:bg-red-400 hover:text-white hover:duration-500">
+                        Logout
                     </button>
+                    {{else}}
                     <button class="text-sm sm:text-base bg-white border-red-400 text-red-400 rounded-lg py-2 px-4 mr-5 mt-3 hover:bg-red-400 hover:text-white hover:duration-500">
                         <a href="#">Sign Up</a>
                     </button>
+                    <button class="text-sm sm:text-base bg-white border-red-400 text-red-400 rounded-lg py-2 px-4 mr-5 mt-3 hover:bg-red-400 hover:text-white hover:duration-500">
+                        <a href="/login">Log in</a>
+                    </button>
+                    {{/if}}
                 </div>
             </div>
         </div><!--end nav-->
@@ -47,5 +53,8 @@
         </main>
     </div>
     {{{block "scripts"}}}
+    {{#if isLoggedIn}}
+        <script src="/js/logout.js"></script>
+    {{/if}}
 </body>
 </html>

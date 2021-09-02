@@ -25,7 +25,7 @@ const signupFormHandler = async (event) => {
       document.location.replace("/");
       alert("Sigup successful");
     } else {
-      if (response.status == 401) {
+      if (response.status == 409) {
         const { message } = await response.json();
 
         // display the error message

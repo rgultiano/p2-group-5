@@ -40,6 +40,38 @@ router.post('/auth', async (req, res) => {
     }
 });
 
+router.post("/signup", async (req, res) => {
+  try {
+    //validate for the unique e-mail address
+    console.log(User);
+    const dbUserData = await User.findOne({
+      where: { email: req.body.email },
+    });
+
+    if (dbUserData) {
+      res
+        .status(409)
+        .json({ message: "Email already exists. Please try again" });
+      return;
+    }
+
+    const newUser = await User.create({
+      first_name: req.body.firstname,
+      last_name: req.body.lastname,
+      email: req.body.email,
+    });
+
+    const newUserAuth = await UserAuth.create({
+      password: req.body.password,
+      user_id: newUser.id,
+      auth_type: "email",
+    });
+    res.status(200).json({ id: newUser.id });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});  
 
 router.post('/logout', (req, res) => {
     if (req.session.logged_in) {

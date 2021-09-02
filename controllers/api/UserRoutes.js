@@ -50,7 +50,7 @@ router.post("/signup", async (req, res) => {
 
     if (dbUserData) {
       res
-        .status(401)
+        .status(409)
         .json({ message: "Email already exists. Please try again" });
       return;
     }

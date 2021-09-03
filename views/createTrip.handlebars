@@ -1,0 +1,41 @@
+    {{#content "head"}}    
+    <!-- All the stylesheets -->
+    <link rel="stylesheet" href="./css/customStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+
+    <!-- All the required scripts -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="./js/createTrip.js"></script>
+    {{/content}}
+    <div class="content">
+    
+        <section class="tripCreatorSec" id="tripCreatorSec">
+    
+            <h2 class="header2 unselect">Create Trip...</h2>
+            
+            <div class="tripCreator" id="tripCreator">
+                <div class="inputSec">
+                    <input class="input" type="text" placeholder="Add a city..." id="add">
+                    <button class="addBtn" onclick="getSearch()" id="submit"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>
+            <div class="saveBtnWrap">
+                <button class="saveBtn" onclick="saveData()"><i class="fas fa-save"></i></button>
+            </div>
+    
+        </section>
+
+        <section class="mapPreview" id="mapPreview">
+            <div id="map"></div>
+        </section>
+    </div>
+    {{#content "scripts"}}    
+    <script    
+      src="https://maps.googleapis.com/maps/api/js?key={{ENV.GOOGLE_API}}&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+    {{/content}}

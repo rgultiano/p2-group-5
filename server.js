@@ -19,6 +19,9 @@ hbs.handlebars.registerHelper(layouts(hbs.handlebars));
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// give app access to env variables
+app.locals.ENV = process.env;
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

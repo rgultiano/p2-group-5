@@ -1,9 +1,4 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    {{#content "head"}}    
     <!-- All the stylesheets -->
     <link rel="stylesheet" href="./css/customStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
@@ -15,20 +10,7 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="./js/createTrip.js"></script>
-
-    <title>Create Trip</title>
-</head>
-<body>
-
-    <header class="navbar">
-        <a class="header1 unselect" href="#">Travel Bug <i class="fas fa-bug bugIcon"></i><a>
-        <nav>
-            <ul>
-                <li><i class="fas fa-user-circle userIcon"></i></li>
-            </ul>
-        </nav>
-    </header>
-
+    {{/content}}
     <div class="content">
     
         <section class="tripCreatorSec" id="tripCreatorSec">
@@ -51,17 +33,9 @@
             <div id="map"></div>
         </section>
     </div>
-
-    <!-- <footer class="unselect">
-        <a class="footerLink" href="#">About</a>
-        <a class="footerLink" href="#">Contact</a>
-    </footer> -->
-    
-    <!-- For Google Maps API -->
+    {{#content "scripts"}}    
     <script    
       src="https://maps.googleapis.com/maps/api/js?key={{ENV.GOOGLE_API}}&callback=initMap&libraries=&v=weekly"
       async
     ></script>
-
-</body>
-</html>
+    {{/content}}

@@ -120,7 +120,7 @@ function polyline(location) {
 }
 
 
-// Saving to database functionality required
+// TODO: Saving to database functionality required
 function saveData() {
   console.log(coor);
 

@@ -70,7 +70,7 @@ function deleteCard(btn) {
 
 function geoCodingApi(location) {
   // Require a dotenv for api key
-  var api_key = "API_KEY_GOES_HERE";
+  var api_key = "AIzaSyDaF56j4NQz7eHYts9ngnfid9wSlWd1WU4";
   url = `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${api_key}`;
   
   fetch(url)
@@ -109,6 +109,7 @@ function initMap(coor) {
   }
 
   map = new google.maps.Map(document.getElementById("map"), mapOptions);
+  const geocoder = new google.maps.Geocoder();
 } 
 
 

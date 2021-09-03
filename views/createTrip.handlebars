@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- All the stylesheets -->
-    <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/customStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,7 +59,7 @@
     
     <!-- For Google Maps API -->
     <script    
-      src="https://maps.googleapis.com/maps/api/js?key= API_KEY_GOES_HERE &callback=initMap&libraries=&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key={{ENV.GOOGLE_API}}&callback=initMap&libraries=&v=weekly"
       async
     ></script>
 

@@ -1,4 +1,5 @@
 let map;
+let geocoder;
 // This variable will hold id for each card along with its lat, lng value
 var coor = [];
 // a temp array to hold all coordinates of all listed locations for the polylines to be rendered
@@ -68,25 +69,19 @@ function deleteCard(btn) {
   reInit()
 }
 
-function geoCodingApi(location) {
-  // Require a dotenv for api key
-  var api_key = "AIzaSyDaF56j4NQz7eHYts9ngnfid9wSlWd1WU4";
-  url = `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${api_key}`;
-  
-  fetch(url)
-  .then(response => response.json())
-  .then(data => output = data)
-  .then(() => renderMap(output, location))
+function geoCodingApi(locationName) {
+  geocoder.geocode({address: locationName})
+  .then(({results}) => {
+    renderMap(results[0].geometry.location, locationName)
+  });
 }
 
-function renderMap(output, location) {
-  var latLng = output['results'][0]['geometry']['location'];
+function renderMap(geoCodeLocation, locationName) {
+  const id = uid();
+  appndCoor(id, geoCodeLocation);
 
-  var id = uid();
-  appndCoor(id, latLng);
-
-  initMap(latLng);
-  addCityCard(id, location);
+  initMap(geoCodeLocation);
+  addCityCard(id, locationName);
 
   listPolyCoor();
   polyline(polyCoor);
@@ -109,7 +104,7 @@ function initMap(coor) {
   }
 
   map = new google.maps.Map(document.getElementById("map"), mapOptions);
-  const geocoder = new google.maps.Geocoder();
+  geocoder = new google.maps.Geocoder();
 } 
 
 

@@ -983,8 +983,14 @@ module.exports = {
         require('@tailwindcss/forms'),
         // ...
       ],
-    }
-  ],
+      variants: {
+         extend: {
+            // ...
+         fontSize: ['hover', 'focus'],
+          }}
+      }
+      
+        ],
 
 }
 

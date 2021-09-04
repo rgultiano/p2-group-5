@@ -21,4 +21,17 @@ module.exports = {
       next();
     }
   },
+  apiUserAPIAuth: (req, res, next) => {
+    if(!req.session || 
+      !req.session.user_id || 
+      req.session.user_id != req.params.id
+      )
+      {
+        res.status(401).json({message: "You are unauthorized to access this resource!"});
+        return;
+      }
+      
+      next();
+      return;
+  }
 };

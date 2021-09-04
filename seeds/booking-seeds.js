@@ -1,5 +1,7 @@
 const { Booking } = require("../models");
 
+//TODO: Update seed data
+/*
 const bookingData = [
   {
     user_id: "1",
@@ -18,3 +20,4 @@ const bookingData = [
 const seedBooking = () => Booking.bulkCreate(bookingData);
 
 module.exports = seedBooking;
+*/

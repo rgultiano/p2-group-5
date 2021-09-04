@@ -21,7 +21,7 @@ module.exports = {
       next();
     }
   },
-  apiUserAPIAuth: (req, res, next) => {
+  userAPIAuth: (req, res, next) => {
     if(!req.session || 
       !req.session.user_id || 
       req.session.user_id != req.params.id

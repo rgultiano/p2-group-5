@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, UserAuth, Trip } = require('../../models');
+const { userAPIAuth } = require('../../utils/auth');
 
 router.post('/auth', async (req, res) => {
     try{
@@ -84,7 +85,7 @@ router.post('/logout', (req, res) => {
 });
 
 // add a user trip
-router.post('/:id/trips', apiUserAPIAuth, (req, res) =>{
+router.post('/:id/trips', userAPIAuth, async (req, res) =>{
   const {name, origin, departure_date, return_date, destinations} = req.body;
   const newTrip = await Trip.create({
     name,
@@ -93,12 +94,12 @@ router.post('/:id/trips', apiUserAPIAuth, (req, res) =>{
     return_date
   });
   if(destinations){
-    destinations.forEach((id, location_name, notes, order) => {
+    destinations.forEach( (id, location_name, notes, order) => {
       if(id){
         //then it's an update, for a created trip this shouldn't be the case
       } else {
         //create a new destination
-        const newDestination = await Destination.create({
+        Destination.create({
           id,
           location_name,
           notes,
@@ -110,7 +111,7 @@ router.post('/:id/trips', apiUserAPIAuth, (req, res) =>{
   }
 });
 
-router.post('/:id/trips/:trip_id', apiUserAPIAuth, (req, res) =>{
+router.post('/:id/trips/:trip_id', userAPIAuth, async (req, res) =>{
   const {name, origin, departure_date, return_date, destinations} = req.body;
   const newTrip = await Trip.update({
     name,
@@ -127,7 +128,7 @@ router.post('/:id/trips/:trip_id', apiUserAPIAuth, (req, res) =>{
     destinations.forEach((destination) => {
       if(id){
         //then it's an update, for a created trip this shouldn't be the case
-        const dest = await Destination.update(
+        Destination.update(
           {
             location_name: destination.location_name,
             notes: destination.notes,
@@ -143,7 +144,7 @@ router.post('/:id/trips/:trip_id', apiUserAPIAuth, (req, res) =>{
         );
       } else {
         //create a new destination
-        const dest = await Destination.create({
+        Destination.create({
           location_name: destination.location_name,
           notes: destination.notes,
           order: destination.order,

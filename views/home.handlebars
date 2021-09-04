@@ -85,3 +85,9 @@
                 </div>
             </div>
         </div>
+{{#content "scripts"}}
+    <script type="text/javascript">
+        const user_id = '{{sess_user_id}}';
+    </script>
+    <script src="/js/script.js"></script>
+{{/content}}

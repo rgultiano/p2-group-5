@@ -31,6 +31,10 @@ Trip.init(
       type: DataTypes.DATE,
       allowNull: true,
     },
+    deleted_dt:{
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
     status:{
       type: DataTypes.STRING,
       defaultValue: 'open',

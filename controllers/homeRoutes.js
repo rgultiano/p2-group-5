@@ -7,10 +7,12 @@ const { withAuth } = require('../utils/auth');
 router.get('/', async (req, res) => {
   if (req.session.logged_in) {
     console.log({user_id: req.session.user_id});
+    res.locals.sess_user_id = req.session.user_id;
     const tripData = await Trip.findAll( {
       include: [{ model: Destination}],
       where: {
         user_id: req.session.user_id,
+        deleted_dt: null,
       },
     });
 

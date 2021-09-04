@@ -4,7 +4,11 @@ const { withAuth } = require('../utils/auth');
 
 // render homepage as index
 router.get('/', function (req, res) {
-    res.render('index'); 
+  if (!req.session.logged_in) {
+    res.render('home'); 
+    return;
+  }
+  res.render('index'); 
 });
 
 // render the login page

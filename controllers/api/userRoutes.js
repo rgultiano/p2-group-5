@@ -169,7 +169,7 @@ router.get('/:id/trips/:trip_id', userAPIAuth, async (req, res) =>{
     const trip_id = req.params.trip_id;
     const user_id = req.params.id;
 
-    const productData = await Trip.findByPk(trip_id, {
+    const tripData = await Trip.findByPk(trip_id, {
       include: [{ model: Destination}],
       where: {
         user_id: user_id,
@@ -177,14 +177,41 @@ router.get('/:id/trips/:trip_id', userAPIAuth, async (req, res) =>{
       order:[['destinations', 'order', 'ASC']],
     });
 
-    if(!productData){
+    if(!tripData){
       res.status(404).json({message: `No Trip found with an id of '${req.params.id}'.`});
     } else {
-      res.status(200).json(productData);
+      res.status(200).json(tripData);
     }
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
+
+router.get('/:id/trips/', userAPIAuth, async (req, res) =>{
+  try{
+    // find a single trip by its `id` and user
+    // be sure to include its associated Category and Tag data
+    const trip_id = req.params.trip_id;
+    const user_id = req.params.id;
+
+    const tripData = await Trip.findAll(trip_id, {
+      include: [{ model: Destination}],
+      where: {
+        user_id: user_id,
+      },
+      order:[['destinations', 'order', 'ASC']],
+    });
+
+    if(!tripData){
+      res.status(404).json({message: `No Trip found with an id of '${req.params.id}'.`});
+    } else {
+      res.status(200).json(tripData);
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 
 module.exports = router;

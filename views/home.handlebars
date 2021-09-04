@@ -1,0 +1,124 @@
+    {{#content "title"}}    
+    <title>TravelBug - Home</title>
+    {{/content}}
+        <!--Trip logged for curation-->
+        <div>
+            <div class="flex">
+                <div class="hidden md:block w-1/4 p-2 bg-blue-50 rounded-md rounded-r-none ml-5 my-5">
+                    <div class="rounded overflow-hidden shadow-lg">
+                        <img class="w-full h-full" src="img/passport and ticket.jpg" alt="Sign with many destinations">
+                    </div>
+                </div>
+                <div class="w-2/3 md:w-1/4 p-2 bg-blue-50 rounded-md md:rounded-l-none my-5 ml-5 md:ml-0">
+                    <div class="w-full">
+                        <div class="text-center text-sm lg:text-xl">
+                        <h3 class="font-bold mb-2 pb-2 border-b border-gray-400">Logged for Curation</h3>
+                        </div>
+                        <div class="md:mt-2 lg:mt-5 xl:mt-10 text-center text-sm lg:text-lg">
+                        <!--trip seected for curation goes here-->
+                            <div class="flex justify-center text-sm lg:text-base xl:text-lg font-bold">
+                                <button class="bg-white border-red-400 text-red-400 rounded-lg py-1 md:py-2 px-4 mr-2 mt-3 md:mt-0 hover:bg-red-400 hover:text-white hover:duration-500">
+                                <a href="#">View</a>
+                                </button>
+                                <button class="bg-white border-red-400 text-red-400 rounded-lg py-2 px-4 ml-2 mt-3 md:mt-0 hover:bg-red-400 hover:text-white hover:duration-500">
+                                <a href="#">Remove</a>
+                                </button>
+                            </div>
+                        </div>
+                    <div>
+                </div>     
+            </div> 
+        </div>
+
+        <!--Start New Trip-->
+        <div class="bg-blue-500 w-1/3 md:w-1/2 flex justify-center items-center">
+            <div class="flex flex-col md:flex-row">
+                <div class="flex justify-center">
+                <a href="#"><i class="fas fa-plus text-white text-2xl pt-2 md:m-12 xl:m-10 hover:text-green-200"></i></a><!--link to trip planning page needed here-->
+                </div> 
+                <div class="w-full text-white xl:text-2xl pt-1 md:m-12 xl:m-10">
+                    <h3>New Trip</h3>
+                </div>
+            </div>
+        </div>
+
+        </div><!--removing this div changes the formatting - not sure why...-->
+        
+
+        <!--Saved Trips-->
+        <div class="flex flex-row"> 
+            <!--suitcase image-->
+            <div class="hidden md:block bg-blue-50 py-5 sm:py-10 pl-5 sm:pl-10 w-1/3 rounded-md rounded-r-none ml-5 my-5">
+                <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                    <img class="" src="img/stack of suitcases.jpg" alt="Stack of suitcases">
+                </div>
+            </div>
+
+            <!--trip card-->
+            <div class="flex w-full md:w-2/3 p-2 bg-blue-50 rounded-md md:rounded-l-none my-5 ml-5 md:ml-0">
+
+                <!--model--> <!--note: from edit trip screen, user should be able to "add trip to be curated" or "add trip to completed trips"-->
+                <div class="w-full mx-5 lg:mx-10">
+                    <h3 class="text-center font-bold text-base med:text-lg lg:text-xl mb-2 pb-2 border-b border-gray-400">My Saved Trips</h3><!--table header for completed trips-->
+
+                    <div class="grid grid-cols-1 grid-rows-10 text-gray-700 text-sm med:text-base lg:text-lg italic mt-5"><!--table data for completed trips-->
+                        
+                        <!--examples - seed data goes here-->
+                        <div class="flex justify-between">
+                            <span class="pb-2 text-center">Philip Island with Ingrid</span><!--trip name-->
+                            <div class="flex flex-row">
+                                <i class="fas fa-trash-alt text-gray-700 hover:text-red-400 mr-20"></i><!--icons for delete or edit--->
+                                <i class="fas fa-pencil-alt text-gray-700 hover:text-green-400"></i>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <span class="pb-2 text-center">Disneyland</span>
+                            <div class="flex flex-row">
+                                <i class="fas fa-trash-alt text-gray-700 hover:text-red-400 mr-20"></i>
+                                <i class="fas fa-pencil-alt text-gray-700 hover:text-green-400"></i>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <span class="pb-2 text-center">Ireland</span>
+                            <div class="flex flex-row">
+                                <i class="fas fa-trash-alt text-gray-700 hover:text-red-400 mr-20"></i>
+                                <i class="fas fa-pencil-alt text-gray-700 hover:text-green-400"></i>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <span class="pb-2 text-center">Mt Hotham Ski Trip 2021</span>
+                            <div class="flex flex-row">
+                                <i class="fas fa-trash-alt text-gray-700 hover:text-red-400 mr-20"></i>
+                                <i class="fas fa-pencil-alt text-gray-700 hover:text-green-400"></i>
+                            </div>
+                        </div>
+
+                    <!--completed Trips-->
+                        <div class="px-5 py-2 mt-2 lg:mt-10">
+                            <h3 class="text-center font-bold text-base med:text-lg lg:text-xl lg:mb-2 pb-2 border-b border-gray-400">Completed Trips</h3><!--heading-->
+
+                        <div class="grid grid-cols-1 grid-rows-10 text-gray-700 text-sm med:text-base lg:text-lg italic mt-5"><!--table data for completed trips-->
+                        
+                            <!--examples - this will be empty to start -->
+                            <div class="flex justify-between">
+                                <span class="pb-2 text-center">Tasmania</span>
+                                <div class="">
+                                    <i class="fas fa-trash-alt text-gray-700 hover:text-red-400 mr-20"></i>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-between">
+                                <span class="pb-2 text-center">Hotham Ski trip 2019</span>
+                                <div class="flex flex-row">
+                                    <i class="fas fa-trash-alt text-gray-700 hover:text-red-400 mr-20"></i>
+                                </div>
+                            </div>
+
+                        </div> <!--end table data for completed trips-->
+                    
+                </div>
+            </div>
+        </div>

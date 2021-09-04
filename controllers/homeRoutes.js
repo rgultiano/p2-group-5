@@ -17,7 +17,12 @@ router.get('/', async (req, res) => {
     const tripArr = tripData.map(trip=>{return trip.get({plain:true})});
     console.log(tripArr);
 
-    res.render('home', {trips: tripArr});
+    res.render('home', {
+      trips: tripArr.filter(trip=>trip.status == 'open').map(trip=> {return {showDelete: true, showEdit: true, ...trip}}),
+      completed_trips: tripArr.filter(trip=>trip.status == 'completed').map(trip=> {return {showDelete: true, showEdit: true, ...trip}}),
+      curated_trips: tripArr.filter(trip=>trip.status == 'awaiting_curation').map(trip=> {return {showDelete: true, showView: true, ...trip}}),
+      booked_trips: tripArr.filter(trip=>trip.status == 'booked').map(trip=> {return {showDelete: true, showView: true, ...trip}}),
+    });
     return;
   }
   res.render('index'); 

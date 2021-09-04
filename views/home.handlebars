@@ -64,26 +64,20 @@
                 <div class="w-full mx-5 lg:mx-10">
                     <h3 class="text-center font-bold text-base med:text-lg lg:text-xl mb-2 pb-2 border-b border-gray-400">My Saved Trips</h3><!--table header for completed trips-->
 
-                    {{> list_trips}}
+                    <div class="grid grid-cols-1 grid-rows-10 text-gray-700 text-sm med:text-base lg:text-lg italic mt-5"><!--table data for completed trips-->
+                        {{#each trips}}
+                        {{> home_trip_row}}
+                        {{/each}}
+                    </div>
                     <div class="grid grid-cols-1 grid-rows-10 text-gray-700 text-sm med:text-base lg:text-lg italic mt-5"><!--table data for completed trips-->
                     <!--completed Trips-->
                         <div class="px-5 py-2 mt-2 lg:mt-10">
                             <h3 class="text-center font-bold text-base med:text-lg lg:text-xl lg:mb-2 pb-2 border-b border-gray-400">Completed Trips</h3><!--heading-->
                             <div class="grid grid-cols-1 grid-rows-10 text-gray-700 text-sm med:text-base lg:text-lg italic mt-5"><!--table data for completed trips--> 
                                 <!--examples - this will be empty to start -->
-                                <div class="flex justify-between">
-                                    <span class="pb-2 text-center">Tasmania</span>
-                                    <div class="">
-                                        <i class="fas fa-trash-alt text-gray-700 hover:text-red-400 mr-20"></i>
-                                    </div>
-                                </div>
-
-                                <div class="flex justify-between">
-                                    <span class="pb-2 text-center">Hotham Ski trip 2019</span>
-                                    <div class="flex flex-row">
-                                        <i class="fas fa-trash-alt text-gray-700 hover:text-red-400 mr-20"></i>
-                                    </div>
-                                </div>
+                                {{#each completed_trips}}
+                                {{> home_trip_row}}
+                                {{/each}}
 
                             </div> <!--end table data for completed trips-->
                         </div>

@@ -195,10 +195,12 @@ router.get('/:id/trips/', userAPIAuth, async (req, res) =>{
     // be sure to include its associated Category and Tag data
     const trip_id = req.params.trip_id;
     const user_id = req.params.id;
+    const filter = req.query.filter ? req.query.filter : {};
 
     const tripData = await Trip.findAll(trip_id, {
       include: [{ model: Destination}],
       where: {
+        ...filter,
         user_id: user_id,
       },
     });

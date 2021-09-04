@@ -11,26 +11,17 @@ Trip.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    location_name: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    destination_notes: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    origin: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    departure_date: {
+    return: {
       type: DataTypes.DATE,
-      allowNull: true,
-    },
-    return_date: {
-      type: DataTypes.DATE,
-      allowNull: true,
-    },
-    groupsize: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      defaultValue: 1,
+      allowNull: false,
     },
     created_dt: {
       type: DataTypes.DATE,

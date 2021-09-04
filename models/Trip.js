@@ -27,6 +27,10 @@ Trip.init(
       type: DataTypes.DATE,
       allowNull: true,
     },
+    completed_dt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
     groupsize: {
       type: DataTypes.INTEGER,
       allowNull: true,

@@ -92,7 +92,8 @@ router.post('/:id/trips', userAPIAuth, async (req, res) =>{
     name,
     origin,
     departure_date,
-    return_date
+    return_date,
+    user_id: req.session.user_id
   });
   if(destinations){
     destinations.forEach( async (destination) => {
@@ -178,7 +179,7 @@ router.get('/:id/trips/:trip_id', userAPIAuth, async (req, res) =>{
     });
 
     if(!tripData){
-      res.status(404).json({message: `No Trip found with an id of '${req.params.id}'.`});
+      res.status(404).json({message: `No Trip found with an id of '${req.params.trip_id}'.`});
     } else {
       res.status(200).json(tripData);
     }
@@ -200,11 +201,10 @@ router.get('/:id/trips/', userAPIAuth, async (req, res) =>{
       where: {
         user_id: user_id,
       },
-      order:[['destinations', 'order', 'ASC']],
     });
 
     if(!tripData){
-      res.status(404).json({message: `No Trip found with an id of '${req.params.id}'.`});
+      res.status(404).json({message: `No Trip found for user '${req.params.id}'.`});
     } else {
       res.status(200).json(tripData);
     }

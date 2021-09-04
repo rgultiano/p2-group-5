@@ -28,12 +28,21 @@ async function loadTrip(trip_id){
     data.destinations.forEach(destination => {
       geocoder.geocode({address: destination.location_name})
       .then(({results}) => {
-        renderMap(results[0].geometry.location, destination.location_name, destination.notes)
+        renderMap(results[0].geometry.location, destination.location_name, destination.notes);
       });
     });
   } else {
     alert("Trip Load failed.")
   }
+}
+
+function zoomToObject(obj){
+  var bounds = new google.maps.LatLngBounds();
+  var points = obj.getPath().getArray();
+  for (var n = 0; n < points.length ; n++){
+      bounds.extend(points[n]);
+  }
+  map.fitBounds(bounds);
 }
 
 function getId(id) {
@@ -145,6 +154,7 @@ function polyline(location) {
         strokeWeight: 2,
       });
       path.setMap(map);
+      zoomToObject(path);
 }
 
 

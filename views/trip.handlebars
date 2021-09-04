@@ -15,7 +15,7 @@
     <script src="/js/trip.js"></script>
     {{/content}}
     <div class="title py-4 pl-2">
-    <h2 class="text-2xl font-bold leading-7"><span id="trip_name" spellcheck="false" contenteditable="true">{{#if trip}}{{trip.name}}{{else}}My New Trip...{{/if}}</span>&nbsp;<i class="text-sm far fa-edit"></i></h2>
+    <h2 class="text-2xl font-bold leading-7"><span id="trip_name" spellcheck="false" contenteditable="true">{{#if trip.id}}{{trip.name}}{{else}}My New Trip...{{/if}}</span>&nbsp;<i class="text-sm far fa-edit"></i></h2>
     </div>
     <div class="content">
         <section class="tripCreatorSec" id="tripCreatorSec">
@@ -39,8 +39,8 @@
     {{#content "scripts"}}
     <script type="text/javascript">
         const user_id = '{{sess_user_id}}';
-        {{#if trip_id}}
-        let trip_id = '{{trip_id}}';
+        {{#if trip.id}}
+        let trip_id = '{{trip.id}}';
         {{else}}
         const trip_id = null;
         {{/if}};

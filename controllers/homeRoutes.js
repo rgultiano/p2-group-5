@@ -1,11 +1,23 @@
 const router = require('express').Router();
+const { User, UserAuth, Trip, Destination} = require('../models');
 const apiRoutes = require('./api');
 const { withAuth } = require('../utils/auth');
 
 // render homepage as index
-router.get('/', function (req, res) {
-  if (!req.session.logged_in) {
-    res.render('home'); 
+router.get('/', async (req, res) => {
+  if (req.session.logged_in) {
+    console.log({user_id: req.session.user_id});
+    const tripData = await Trip.findAll( {
+      include: [{ model: Destination}],
+      where: {
+        user_id: req.session.user_id,
+      },
+    });
+
+    const tripArr = tripData.map(trip=>{return trip.get({plain:true})});
+    console.log(tripArr);
+
+    res.render('home', {trips: tripArr});
     return;
   }
   res.render('index'); 
@@ -25,9 +37,18 @@ router.get("/trip", withAuth, (req, res) => {
   res.render("trip");
 });
 
-router.get("/trip/:id", withAuth, (req, res) => {
+router.get("/trip/:id", withAuth, async (req, res) => {
+  const tripData = await Trip.findByPk(req.params.id, {
+    include: [{ model: Destination}],
+    where: {
+      user_id: req.session.user_id,
+    },
+    order:[['destinations', 'order', 'ASC']],
+  });
   res.locals.trip_id = req.params.id;
-  res.render("trip");
+  res.locals.trip = 
+  console.log(tripData.get({plain:true}));
+  res.render("trip", {trip: tripData.get({plain:true})});
 });
 
 module.exports = router;

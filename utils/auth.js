@@ -18,6 +18,7 @@ module.exports = {
       const uriReferrer = `?return_location=${encodeURIComponent(req.url)}`;
       res.redirect(`/login${uriReferrer}`);
     } else {
+      res.locals.sess_user_id = req.session.user_id;
       next();
     }
   },

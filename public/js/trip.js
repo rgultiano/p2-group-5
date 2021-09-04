@@ -121,20 +121,37 @@ function polyline(location) {
 
 
 // TODO: Saving to database functionality required
-function saveData() {
+async function saveData() {
   console.log(coor);
 
-  var allCardData = [];
-  var cardTitles = [];
-  var cardEntries = [];
+  const destinations = [];
 
   for (i in coor) {
     var id = coor[i]["id"]
-    var value = coor[i]["values"]["value"]
-    var title = getId(id+"_title").value
-    var entry = getId(id+"_tripEntry").value
-    allCardData.push({id: id, content: {title: title, entry: entry}, value: {value}})
+    var location_name = getId(id+"_title").value
+    var notes = getId(id+"_tripEntry").value
+    destinations.push({order: i, location_name, notes})
   }
+
+  const trip = {
+    name: getId('trip_name').innerText,
+    destinations
+    //add additional fields as they are implemented
+  };
+
+  const response = await fetch(`/api/users/${user_id}/trips`, {
+    method: "POST",
+    body: JSON.stringify(trip),
+    headers: { "Content-Type": "application/json" },
+    credentials: "same-origin",
+  });
+
+  if (response.ok) {
+    alert("Save success.");
+  } else {
+    alert("Save failed.")
+  }
+
 
   console.log(allCardData)
   

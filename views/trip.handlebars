@@ -33,7 +33,10 @@
             <div id="map"></div>
         </section>
     </div>
-    {{#content "scripts"}}    
+    {{#content "scripts"}}
+    <script type="text/javascript">
+        const user_id = {{sess_user_id}};
+    </script>
     <script    
       src="https://maps.googleapis.com/maps/api/js?key={{ENV.GOOGLE_API}}&callback=initMap&libraries=&v=weekly"
       async

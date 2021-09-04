@@ -3,6 +3,7 @@ const User = require('./User');
 const UserAuth = require('./UserAuth');
 const Booking = require('./Booking');
 const Trip = require('./Trip');
+const Destination = require('./Destination');
 
 UserAuth.belongsTo(User, {
     foreignKey: 'user_id',
@@ -19,4 +20,5 @@ User.hasMany(UserAuth, {
     UserAuth,
     Booking,
     Trip,
+    Destination,
   };

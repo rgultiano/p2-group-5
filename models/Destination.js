@@ -23,10 +23,14 @@ Destination.init(
       type: DataTypes.DATE,
       allowNull: true,
     },
-    user_id: {
+    order: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    trip_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: "user",
+        model: "Trip",
         key: "id",
       },
     },

@@ -22,3 +22,12 @@ User.hasMany(UserAuth, {
     Trip,
     Destination,
   };
+
+  Destination.belongsTo(Trip, {
+      foreignKey: 'trip_id',
+  });
+
+  Trip.hasMany(Destination, {
+    foreignKey: 'trip_id',
+    onDelete: 'CASCADE',
+ });

@@ -12,6 +12,30 @@ $("#add").keyup(function(event) {
   }
 });
 
+function init(){
+  if(trip_id){
+    loadTrip(trip_id);
+  }
+}
+async function loadTrip(trip_id){
+  const response = await fetch(`/api/users/${user_id}/trips/${trip_id}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    credentials: "same-origin",
+  });
+  if (response.ok) {
+    const data = await response.json();
+    data.destinations.forEach(destination => {
+      geocoder.geocode({address: destination.location_name})
+      .then(({results}) => {
+        renderMap(results[0].geometry.location, destination.location_name, destination.notes)
+      });
+    });
+  } else {
+    alert("Trip Load failed.")
+  }
+}
+
 function getId(id) {
   return document.getElementById(id);
 }
@@ -38,7 +62,7 @@ function getSearch() {
   geoCodingApi(input.value);
 }
 
-function addCityCard(id, input) {
+function addCityCard(id, destination_name, notes) {
   listContent = getId('tripCreator');
   
   const elCard = document.createElement('div');
@@ -50,8 +74,8 @@ function addCityCard(id, input) {
         <button class="deleteBtn" id="${id}_deleteCard" onclick="deleteCard(this)"><i class="far fa-trash-alt"></i></button>
     </div>  
     <div class="cardBody">
-        <input class="header3" type="text" name="title" id="${id}_title" value="${input}">
-        <textarea class="tripEntry" placeholder="..." cols='35' rows='10' id='${id}_tripEntry'></textarea>
+        <input class="header3" type="text" name="title" id="${id}_title" value="${destination_name}">
+        <textarea class="tripEntry" placeholder="..." cols='35' rows='10' id='${id}_tripEntry'>${notes ? notes : ''}</textarea>
     </div>`;
     listContent.appendChild(elCard);
 
@@ -80,12 +104,12 @@ function geoCodingApi(locationName) {
   });
 }
 
-function renderMap(geoCodeLocation, locationName) {
+function renderMap(geoCodeLocation, locationName, notes) {
   const id = uid();
   appndCoor(id, geoCodeLocation);
 
   initMap(geoCodeLocation);
-  addCityCard(id, locationName);
+  addCityCard(id, locationName, notes);
 
   listPolyCoor();
   polyline(polyCoor);
@@ -158,29 +182,7 @@ async function saveData() {
 
 
   console.log(allCardData)
-  
-  // How the 'allCardData' var appears for each card once saved. Below is all the required data  
-  // {
-  //   id: "id",
-  //   content: {
-  //     title: "title",
-  //     entry: "entry"
-  //   },
-  //   value: {
-  //     value: {lat: 123, lng: 321}
-  //   }
-  // }
 }
 
 
-
-// How 'coor' var is layed out
-// {
-//   id: "id", 
-//   values: {
-//     value: {
-//       lat: 123,
-//       lng: 321
-//     }
-//   }
-// }
+window.onload = init;

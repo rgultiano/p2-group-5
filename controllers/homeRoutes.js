@@ -21,4 +21,9 @@ router.get("/trip", withAuth, (req, res) => {
   res.render("trip");
 });
 
+router.get("/trip/:id", withAuth, (req, res) => {
+  res.locals.trip_id = req.params.id;
+  res.render("trip");
+});
+
 module.exports = router;

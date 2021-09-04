@@ -16,7 +16,7 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-router.get("/trip", (req, res) => {
+router.get("/trip", withAuth, (req, res) => {
   res.render("trip");
 });
 

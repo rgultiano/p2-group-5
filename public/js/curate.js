@@ -47,3 +47,7 @@ const curateFormHandler = async (event) => {
 }
 
 let curate_mode = true;
+
+document
+.querySelector('.curate-form')
+.addEventListener('submit', loginFormHandler);

@@ -13,13 +13,55 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="/js/trip.js"></script>
+    {{#if curate_view}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
+    {{/if}}
     {{/content}}
     <div class="title py-4 pl-2">
     <h2 class="text-2xl font-bold leading-7"><span id="trip_name" spellcheck="false" contenteditable="true">{{#if trip.id}}{{trip.name}}{{else}}My New Trip...{{/if}}</span>&nbsp;<i class="text-sm far fa-edit"></i></h2>
     </div>
+    {{#if curate_view}}
+    <div class="curate-view">
+        <form class="login-form bg-blue-200 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <h3 class="text-xl mb-2 font-bold">Curation Form</h3>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="curate_group">
+                    Group Size
+                </label>
+                <input class="shadow bg-white appearance-none border rounded w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="curate_group" type="text" placeholder="# people">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="curate_origin">
+                    Departure from
+                </label>
+                <input class="shadow bg-white appearance-none border rounded w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="curate_origin" type="text" placeholder="City you will depart from">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="curate_departure">
+                    Departure date
+                </label>
+                <input class="shadow bg-white appearance-none border rounded w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="curate_departure" type="text" placeholder="dd/mm/yyyy">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="curate_return">
+                    Return date
+                </label>
+                <input class="shadow bg-white appearance-none border rounded w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="curate_return" type="text" placeholder="dd/mm/yyyy">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="curate_notes">
+                    Notes for Curators:
+                </label>
+                <textarea class="shadow bg-white appearance-none border rounded w-full resize-y h-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="curate_notes" type="text" placeholder="Notes..."></textarea>
+            </div>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                Submit
+            </button>
+        </form>
+    </div>
+    {{/if}}
     <div class="content">
         <section class="tripCreatorSec" id="tripCreatorSec">
-         
             <div class="tripCreator" id="tripCreator">
                 <div class="inputSec">
                     <input class="input" type="text" placeholder="Add a city..." id="add">
@@ -37,6 +79,10 @@
         </section>
     </div>
     {{#content "scripts"}}
+    {{#if curate_view}}
+        <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+        <script src="/js/curate.js"></script>
+    {{/if}}
     <script type="text/javascript">
         const user_id = '{{sess_user_id}}';
         {{#if trip.id}}

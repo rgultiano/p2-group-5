@@ -58,4 +58,19 @@ router.get("/trip/:id", withAuth, async (req, res) => {
   res.render("trip", {trip: tripData.get({plain:true})});
 });
 
+router.get("/trip/:id/curate", withAuth, async (req, res) => {
+  const tripData = await Trip.findByPk(req.params.id, {
+    include: [{ model: Destination}],
+    where: {
+      user_id: req.session.user_id,
+    },
+    order:[['destinations', 'order', 'ASC']],
+  });
+  res.locals.trip_id = req.params.id;
+  res.locals.curate_view = true;
+  res.locals.trip = 
+  console.log(tripData.get({plain:true}));
+  res.render("trip", {trip: tripData.get({plain:true})});
+});
+
 module.exports = router;

@@ -231,7 +231,7 @@ router.get('/:id/trips/', userAPIAuth, async (req, res) =>{
 });
 
 router.delete('/:id/trips/:trip_id', userAPIAuth, (req, res) => {
-  // delete one product by its `id` value
+  // delete one Trip by its `id` value
   Trip.update(
     {
       deleted_dt: sequelize.fn('NOW'),
@@ -244,8 +244,32 @@ router.delete('/:id/trips/:trip_id', userAPIAuth, (req, res) => {
       }
     }
   )
-    .then((deletedProduct) => {
-      res.json(deletedProduct);
+    .then((updatedTrip) => {
+      res.json(updatedTrip);
+    })
+    .catch((err) => res.json(err));
+});
+
+router.post('/:id/trips/:trip_id/curate', userAPIAuth, async (req, res) =>{
+  const {departure_date, return_date, groupsize, origin, notes} = req.body;
+  Trip.update(
+    {
+      status: 'awaiting_curation',
+      departure_date,
+      return_date,
+      groupsize,
+      origin,
+      notes
+    },
+    {
+      where: {
+        id: req.params.trip_id,
+        user_id: req.params.id
+      }
+    }
+  )
+    .then((updatedTrip) => {
+      res.json(updatedTrip);
     })
     .catch((err) => res.json(err));
 });

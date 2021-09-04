@@ -12,6 +12,30 @@ $("#add").keyup(function(event) {
   }
 });
 
+function init(){
+  if(trip_id){
+    loadTrip(trip_id);
+  }
+}
+async function loadTrip(trip_id){
+  const response = await fetch(`/api/users/${user_id}/trips/${trip_id}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    credentials: "same-origin",
+  });
+  if (response.ok) {
+    const data = await response.json();
+    data.destinations.forEach(destination => {
+      geocoder.geocode({address: destination.location_name})
+      .then(({results}) => {
+        renderMap(results[0].geometry.location, destination.location_name, destination.notes)
+      });
+    });
+  } else {
+    alert("Trip Load failed.")
+  }
+}
+
 function getId(id) {
   return document.getElementById(id);
 }
@@ -38,18 +62,22 @@ function getSearch() {
   geoCodingApi(input.value);
 }
 
-function addCityCard(id, input) {
-  listContent = getId("tripCreator");
-  listContent.innerHTML += `
-  <div class="card" id="${id}_card">
+function addCityCard(id, destination_name, notes) {
+  listContent = getId('tripCreator');
+  
+  const elCard = document.createElement('div');
+  elCard.setAttribute('id', `${id}_card`);
+  elCard.classList.add('card');
+
+  elCard.innerHTML += `
     <div class="cardHeader">
         <button class="deleteBtn" id="${id}_deleteCard" onclick="deleteCard(this)"><i class="far fa-trash-alt"></i></button>
     </div>  
     <div class="cardBody">
-        <input class="header3" type="text" name="title" id="${id}_title" value="${input}">
-        <textarea class="tripEntry" name="tripEntry" placeholder="..." cols='35' rows='10' id='${id}_tripEntry'></textarea>
-    </div>     
-  </div>`
+        <input class="header3" type="text" name="title" id="${id}_title" value="${destination_name}">
+        <textarea class="tripEntry" placeholder="..." cols='35' rows='10' id='${id}_tripEntry'>${notes ? notes : ''}</textarea>
+    </div>`;
+    listContent.appendChild(elCard);
 
 }
 
@@ -76,12 +104,12 @@ function geoCodingApi(locationName) {
   });
 }
 
-function renderMap(geoCodeLocation, locationName) {
+function renderMap(geoCodeLocation, locationName, notes) {
   const id = uid();
   appndCoor(id, geoCodeLocation);
 
   initMap(geoCodeLocation);
-  addCityCard(id, locationName);
+  addCityCard(id, locationName, notes);
 
   listPolyCoor();
   polyline(polyCoor);
@@ -121,45 +149,40 @@ function polyline(location) {
 
 
 // TODO: Saving to database functionality required
-function saveData() {
+async function saveData() {
   console.log(coor);
 
-  var allCardData = [];
-  var cardTitles = [];
-  var cardEntries = [];
+  const destinations = [];
 
   for (i in coor) {
     var id = coor[i]["id"]
-    var value = coor[i]["values"]["value"]
-    var title = getId(id+"_title").value
-    var entry = getId(id+"_tripEntry").value
-    allCardData.push({id: id, content: {title: title, entry: entry}, value: {value}})
+    var location_name = getId(id+"_title").value
+    var notes = getId(id+"_tripEntry").value
+    destinations.push({order: i, location_name, notes})
   }
 
+  const trip = {
+    name: getId('trip_name').innerText,
+    destinations
+    //add additional fields as they are implemented
+  };
+
+  const response = await fetch(`/api/users/${user_id}/trips`, {
+    method: "POST",
+    body: JSON.stringify(trip),
+    headers: { "Content-Type": "application/json" },
+    credentials: "same-origin",
+  });
+
+  if (response.ok) {
+    alert("Save success.");
+  } else {
+    alert("Save failed.")
+  }
+
+
   console.log(allCardData)
-  
-  // How the 'allCardData' var appears for each card once saved. Below is all the required data  
-  // {
-  //   id: "id",
-  //   content: {
-  //     title: "title",
-  //     entry: "entry"
-  //   },
-  //   value: {
-  //     value: {lat: 123, lng: 321}
-  //   }
-  // }
 }
 
 
-
-// How 'coor' var is layed out
-// {
-//   id: "id", 
-//   values: {
-//     value: {
-//       lat: 123,
-//       lng: 321
-//     }
-//   }
-// }
+window.onload = init;

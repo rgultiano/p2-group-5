@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class Trip extends Model {}
+class Destination extends Model {}
 
-Trip.init(
+Destination.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -11,31 +11,26 @@ Trip.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
-      type: DataTypes.STRING,
+    location_name: {
+      type: DataTypes.TEXT,
       allowNull: false,
     },
-    origin: {
+    notes: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    departure_date: {
+    days: {
       type: DataTypes.DATE,
       allowNull: true,
     },
-    return_date: {
-      type: DataTypes.DATE,
-      allowNull: true,
-    },
-    groupsize: {
+    order: {
       type: DataTypes.INTEGER,
-      allowNull: true,
-      defaultValue: 1,
+      allowNull: false,
     },
-    user_id: {
+    trip_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: "user",
+        model: "Trip",
         key: "id",
       },
     },
@@ -45,8 +40,8 @@ Trip.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "trip",
+    modelName: "destination",
   }
 );
 
-module.exports = Trip;
+module.exports = Destination;

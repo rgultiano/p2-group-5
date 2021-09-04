@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const apiRoutes = require('./api');
+const { withAuth } = require('../utils/auth');
 
 // render homepage as index
 router.get('/', function (req, res) {
@@ -16,8 +17,13 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-router.get("/create_trip", (req, res) => {
-  res.render("createTrip");
+router.get("/trip", withAuth, (req, res) => {
+  res.render("trip");
+});
+
+router.get("/trip/:id", withAuth, (req, res) => {
+  res.locals.trip_id = req.params.id;
+  res.render("trip");
 });
 
 module.exports = router;

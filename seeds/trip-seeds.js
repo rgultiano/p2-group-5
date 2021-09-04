@@ -1,5 +1,7 @@
 const { Trip } = require("../models");
 
+//TODO: Update seed data
+/*
 const tripData = [
   {
     from: "Bangalore",
@@ -20,3 +22,4 @@ const tripData = [
 const seedTrip = () => Trip.bulkCreate(tripData);
 
 module.exports = seedTrip;
+*/

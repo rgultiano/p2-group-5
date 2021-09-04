@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { User, UserAuth } = require('../../models');
+const { User, UserAuth, Trip, Destination} = require('../../models');
+const { userAPIAuth } = require('../../utils/auth');
 
 router.post('/auth', async (req, res) => {
     try{
@@ -81,6 +82,109 @@ router.post('/logout', (req, res) => {
     } else {
         res.status(404).end();
     }
+});
+
+// add a user trip
+router.post('/:id/trips', userAPIAuth, async (req, res) =>{
+  const {name, origin, departure_date, return_date, destinations} = req.body;
+  console.log('++++ post trip ++++++', req.body);
+  const newTrip = await Trip.create({
+    name,
+    origin,
+    departure_date,
+    return_date
+  });
+  if(destinations){
+    destinations.forEach( async (destination) => {
+      if(destination.id){
+        //then it's an update, for a created trip this shouldn't be the case
+      } else {
+        //create a new destination
+        await Destination.create({
+          location_name: destination.location_name,
+          notes: destination.notes,
+          order: destination.order,
+          trip_id: newTrip.id,
+        });
+      }
+    });
+  }
+
+
+  res.status(200).json({ id: newTrip.id });
+});
+
+router.post('/:id/trips/:trip_id', userAPIAuth, async (req, res) =>{
+  const {name, origin, departure_date, return_date, destinations} = req.body;
+  console.log('++++', req.body);
+  const newTrip = await Trip.update({
+    name,
+    origin,
+    departure_date,
+    return_date
+  },
+  {
+    where: {
+      id: req.params.trip_id
+    }
+  });
+  if(destinations){
+    destinations.forEach((destination) => {
+      if(destination.id){
+        //then it's an update, for a created trip this shouldn't be the case
+        Destination.update(
+          {
+            location_name: destination.location_name,
+            notes: destination.notes,
+            order: destination.order,
+            // trip_id: trip_id,
+          },
+          {
+            where: {
+              id: destination.id,
+              trip_id: trip_id
+            }
+          }
+        );
+      } else {
+        //create a new destination
+        Destination.create({
+          location_name: destination.location_name,
+          notes: destination.notes,
+          order: destination.order,
+          trip_id: trip_id,
+        });
+      }
+    });
+  }
+
+
+  res.status(200).json({ id: newTrip.id });
+});
+
+router.get('/:id/trips/:trip_id', userAPIAuth, async (req, res) =>{
+  try{
+    // find a single trip by its `id` and user
+    // be sure to include its associated Category and Tag data
+    const trip_id = req.params.trip_id;
+    const user_id = req.params.id;
+
+    const productData = await Trip.findByPk(trip_id, {
+      include: [{ model: Destination}],
+      where: {
+        user_id: user_id,
+      },
+      order:[['destinations', 'order', 'ASC']],
+    });
+
+    if(!productData){
+      res.status(404).json({message: `No Trip found with an id of '${req.params.id}'.`});
+    } else {
+      res.status(200).json(productData);
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;

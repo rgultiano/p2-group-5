@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TravelBug</title>
-    <link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="/css/tailwind.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {{{block "head"}}}
 </head>
@@ -16,7 +16,7 @@
             <div class="sm:flex justify-between"> 
                 <header class="flex text-6xl sm:text-7xl md:text-8xl font-bold p-3"><!--Main heading-->
                     <h1>TravelBug</h1>
-                    <img src="img/flying beetle.png" class="h-12 mt-1">
+                    <img src="/img/flying beetle.png" class="h-12 mt-1">
                 </header>
 
                 <div class="ml-10 pl-5 sm:mt-5"><!--login sign up buttons-->
@@ -53,6 +53,7 @@
             </footer>
         </main>
     </div>
+    <script src="https://kit.fontawesome.com/223d4625d3.js" crossorigin="anonymous"></script>
     {{{block "scripts"}}}
     {{#if isLoggedIn}}
         <script src="/js/logout.js"></script>

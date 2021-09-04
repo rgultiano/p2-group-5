@@ -3,7 +3,7 @@ const sequelize = require("../config/connection");
 
 class Trip extends Model {}
 
-Destination.init(
+Trip.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -15,23 +15,13 @@ Destination.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    notes: {
+    destination_notes: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     return: {
       type: DataTypes.DATE,
       allowNull: false,
-    },
-    created_dt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
-    updated_dt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
     },
     user_id: {
       type: DataTypes.INTEGER,

@@ -32,16 +32,6 @@ Trip.init(
       allowNull: true,
       defaultValue: 1,
     },
-    created_dt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
-    updated_dt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
     user_id: {
       type: DataTypes.INTEGER,
       references: {

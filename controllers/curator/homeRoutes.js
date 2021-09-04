@@ -14,35 +14,34 @@ router.get('/', async (req, res) => {
       where: {
         user_id: req.session.user_id,
         deleted_dt: null,
+        role: 'C001',
+        status: 'awaiting_curation',
       },
     });
 
     const tripArr = tripData.map(trip=>{return trip.get({plain:true})});
     console.log(tripArr);
 
-    res.render('home', {
-      trips: tripArr.filter(trip=>trip.status == 'open').map(trip=> {return {showDelete: true, showEdit: true, showSendCuration: true, ...trip}}),
-      completed_trips: tripArr.filter(trip=>trip.status == 'completed').map(trip=> {return {showDelete: true, showEdit: true, ...trip}}),
-      curated_trips: tripArr.filter(trip=>trip.status == 'awaiting_curation').map(trip=> {return {showDelete: true, showView: true, ...trip}}),
-      booked_trips: tripArr.filter(trip=>trip.status == 'booked').map(trip=> {return {showDelete: true, showView: true, ...trip}}),
+    res.render('curator', {
+      awaiting_curation_trip: tripArr,
     });
     return;
   }
-  res.render('index'); 
+  res.render('index', {isCuratorRout: true}); 
 });
 
 // render the login page
 router.get('/login', (req, res) => {
 
-  res.render('login');
+  res.render('login', {isCuratorRout: true});
 });
 
 router.get("/signup", (req, res) => {
-  res.render("signup");
+  res.render("signup", {isCuratorRout: true});
 });
 
 router.get("/trip", withAuth, (req, res) => {
-  res.render("trip");
+  res.render("trip"), {isCuratorRout: true};
 });
 
 router.get("/trip/:id", withAuth, async (req, res) => {
@@ -56,22 +55,7 @@ router.get("/trip/:id", withAuth, async (req, res) => {
   res.locals.trip_id = req.params.id;
   res.locals.trip = 
   console.log(tripData.get({plain:true}));
-  res.render("trip", {trip: tripData.get({plain:true})});
-});
-
-router.get("/trip/:id/curate", withAuth, async (req, res) => {
-  const tripData = await Trip.findByPk(req.params.id, {
-    include: [{ model: Destination}],
-    where: {
-      user_id: req.session.user_id,
-    },
-    order:[['destinations', 'order', 'ASC']],
-  });
-  res.locals.trip_id = req.params.id;
-  res.locals.curate_view = true;
-  res.locals.trip = 
-  console.log(tripData.get({plain:true}));
-  res.render("trip", {trip: tripData.get({plain:true})});
+  res.render("trip", {isCuratorRoute: true, trip: tripData.get({plain:true})});
 });
 
 module.exports = router;

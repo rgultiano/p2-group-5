@@ -3,7 +3,7 @@ const sequelize = require("../config/connection");
 
 class Trip extends Model {}
 
-Trip.init(
+Destination.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -15,7 +15,7 @@ Trip.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    destination_notes: {
+    notes: {
       type: DataTypes.STRING,
       allowNull: false,
     },

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, UserAuth } = require('../../models');
+const { User, UserAuth, Trip } = require('../../models');
 
 router.post('/auth', async (req, res) => {
     try{
@@ -81,6 +81,32 @@ router.post('/logout', (req, res) => {
     } else {
         res.status(404).end();
     }
+});
+
+// add a user trip
+router.post('/:id/trips', apiUserAPIAuth, (req, res) =>{
+  const {name, origin, departure_date, return_date, destinations} = req.body;
+  const newTrip = await Trip.create({
+    name,
+    origin,
+    departure_date,
+    return_date
+  });
+  if(destinations){
+    destinations.forEach((id, location_name, notes, order) => {
+      if(id){
+        //then it's an update
+      } else {
+        //create a new destination
+        const newDestination = await Destination.create({
+          id,
+          location_name,
+          notes,
+          order
+        });
+      }
+    });
+  }
 });
 
 module.exports = router;

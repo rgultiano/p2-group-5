@@ -1,5 +1,3 @@
-const e = require("express");
-
 const depPicker = new Pikaday({ field: document.getElementById('curate_departure'), format: 'D/M/YYYY',
     toString(date, format) {
         // you should do formatting based on the passed format,
@@ -36,13 +34,26 @@ const retPicker = new Pikaday({ field: document.getElementById('curate_return'),
 const curateFormHandler = async (event) => {
     event.preventDefault();
 
-    const group_size = getElementById('curate_group').value;
-    const origin = getElementById('curate_origin').value;
-    const departure_date = getElementById('curate_departure').value;
-    const return_date = getElementById('curate_return').value;
-    const notes = getElementById('curate_notes').innerText;
+    const groupsize = document.getElementById('curate_group').value;
+    const origin = document.getElementById('curate_origin').value;
+    const departure_date = document.getElementById('curate_departure').value;
+    const return_date = document.getElementById('curate_return').value;
+    const notes = document.getElementById('curate_notes').innerText;
 
 
+    const response = await fetch(`/api/users/${user_id}/trips/${trip_id}/curate`, {
+        method: 'POST',
+        body: JSON.stringify({ groupsize, origin, departure_date, return_date, notes}),
+        headers: { 'Content-Type': 'application/json' },
+    });
+
+    if(response.ok)
+    {
+        alert('ok');
+    }
+    else{
+        alert('Error sending for curation');
+    }
 
 }
 
@@ -50,4 +61,4 @@ let curate_mode = true;
 
 document
 .querySelector('.curate-form')
-.addEventListener('submit', loginFormHandler);
+.addEventListener('submit', curateFormHandler);

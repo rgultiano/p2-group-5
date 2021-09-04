@@ -79,18 +79,18 @@
         </section>
     </div>
     {{#content "scripts"}}
+    <script type="text/javascript">
+        const user_id = '{{sess_user_id}}';
+        {{#if trip.id}}
+        const trip_id = '{{trip.id}}';
+        {{else}}
+        let trip_id = null;
+        {{/if}};
+    </script>
     {{#if curate_view}}
         <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
         <script src="/js/curate.js"></script>
     {{/if}}
-    <script type="text/javascript">
-        const user_id = '{{sess_user_id}}';
-        {{#if trip.id}}
-        let trip_id = '{{trip.id}}';
-        {{else}}
-        const trip_id = null;
-        {{/if}};
-    </script>
     <script    
       src="https://maps.googleapis.com/maps/api/js?key={{ENV.GOOGLE_API}}&callback=initMap&libraries=&v=weekly"
       async

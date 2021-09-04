@@ -39,17 +39,21 @@ function getSearch() {
 }
 
 function addCityCard(id, input) {
-  listContent = getId("tripCreator");
-  listContent.innerHTML += `
-  <div class="card" id="${id}_card">
+  listContent = getId('tripCreator');
+  
+  const elCard = document.createElement('div');
+  elCard.setAttribute('id', `${id}_card`);
+  elCard.classList.add('card');
+
+  elCard.innerHTML += `
     <div class="cardHeader">
         <button class="deleteBtn" id="${id}_deleteCard" onclick="deleteCard(this)"><i class="far fa-trash-alt"></i></button>
     </div>  
     <div class="cardBody">
         <input class="header3" type="text" name="title" id="${id}_title" value="${input}">
-        <textarea class="tripEntry" name="tripEntry" placeholder="..." cols='35' rows='10' id='${id}_tripEntry'></textarea>
-    </div>     
-  </div>`
+        <textarea class="tripEntry" placeholder="..." cols='35' rows='10' id='${id}_tripEntry'></textarea>
+    </div>`;
+    listContent.appendChild(elCard);
 
 }
 

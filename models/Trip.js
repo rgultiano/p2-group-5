@@ -27,6 +27,20 @@ Trip.init(
       type: DataTypes.DATE,
       allowNull: true,
     },
+    completed_dt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    status:{
+      type: DataTypes.STRING,
+      defaultValue: 'open',
+      validate:{
+        isIn: {
+            args: [['open', 'awaiting_curation', 'booked', 'completed']],
+          }
+      },
+      allowNull: true,
+    },
     groupsize: {
       type: DataTypes.INTEGER,
       allowNull: true,

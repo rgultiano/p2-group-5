@@ -95,14 +95,59 @@ router.post('/:id/trips', apiUserAPIAuth, (req, res) =>{
   if(destinations){
     destinations.forEach((id, location_name, notes, order) => {
       if(id){
-        //then it's an update
+        //then it's an update, for a created trip this shouldn't be the case
       } else {
         //create a new destination
         const newDestination = await Destination.create({
           id,
           location_name,
           notes,
-          order
+          order,
+          trip_id: newTrip.id,
+        });
+      }
+    });
+  }
+});
+
+router.post('/:id/trips/:trip_id', apiUserAPIAuth, (req, res) =>{
+  const {name, origin, departure_date, return_date, destinations} = req.body;
+  const newTrip = await Trip.update({
+    name,
+    origin,
+    departure_date,
+    return_date
+  },
+  {
+    where: {
+      id: req.params.trip_id
+    }
+  });
+  if(destinations){
+    destinations.forEach((destination) => {
+      if(id){
+        //then it's an update, for a created trip this shouldn't be the case
+        const dest = await Destination.update(
+          {
+            location_name: destination.location_name,
+            notes: destination.notes,
+            order: destination.order,
+            // trip_id: trip_id,
+          },
+          {
+            where: {
+              id: destination.id,
+              trip_id: trip_id
+            }
+          }
+        );
+      } else {
+        //create a new destination
+        const dest = await Destination.create({
+          location_name: destination.location_name,
+          notes: destination.notes,
+          order: destination.order,
+          trip_id: trip_id,
         });
       }
     });

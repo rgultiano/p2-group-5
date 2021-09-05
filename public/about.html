@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About TravelBug</title>
+    <link rel="stylesheet" href="css/tailwind.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/223d4625d3.js" crossorigin="anonymous"></script>
+    
+</head>
+
+<body class="text-gray-600 font-main">
+
+    <header class="flex flex-col md:flex-row justify-between bg-blue-100"> 
+        <div>
+            <div class="flex flex-col lg:flex-row text-4xl sm:text-5xl md:text-6xl font-bold p-3 sm:mb-1"><!--Logo-->
+                <div class="flex flex-row"> 
+                    <h1>TravelBug</h1>
+                    <img src="img/flying beetle.png" class="h-8 md:h-12 mt-1">
+                </div>
+                <div class="text-left lg:text-center text-xl italic sm:text-2xl md:text-3xl font-bold ml-1 lg:mt-5"><!--Sub heading-->
+                    <h2>About Us</h2>
+                </div>
+            </div>
+            <div class=""><!--logged in message-->
+                <div class="font-bold text-sm sm:text-base lg:text-md text-red-900 pb-2 px-4 mr-5">
+                    Logged in as:  <span class="font-light italic">userName</span>
+                </div> 
+            </div>
+        </div>
+
+        <nav><!--nav menu-->  
+            <div class="md:p-4 text-base lg:text-lg bg-blue-100 text-blue-900">
+                <ul class="flex flex-row font-semibold">
+                    <li class=" ml-5 md:m-5"><a href="profilePage.html" class="md:p-2 hover:bg-blue-200 transition duration-300">Home</a></li>
+                    <li class="active underline ml-5 md:m-5"><a href="about.html" class="md:p-2 hover:bg-blue-200 transition duration-300">About</a></li>
+                    <li class="ml-5 md:m-5"><a href="" class="md:p-2 hover:bg-blue-200 transition duration-300">Logout</a></li>
+                </ul>
+            </div>
+        </nav>    
+        
+    </header>       
+    
+    <main class="flex justify-center bg-blue-500 p-5 ">
+        <div class="mb-10">
+            <!--plan trips with friends-->
+            <div class="flex flex-col md:flex-row w-full m-2 p-2 bg-blue-50 rounded-md">
+                <div class="rounded overflow-hidden shadow-lg">
+                    <img class="w-full h-full" src="img/travelling friends.jpg" alt="Sign with many destinations">
+                </div>
+                <div class="text-center text-sm lg:text-xl">
+                    <h3 class="font-bold m-2 p-2 border-b border-gray-400">TravelBug is a convenient one-stop shop for all your travel planning needs</h3>
+                    <p></p>
+                </div>
+            </div>
+
+
+            <div class="flex">
+                <!--find inspiration-->
+                <div class="flex flex-col md:flex-row w-full m-2 p-2 bg-blue-50 rounded-md">
+                    <div class="rounded overflow-hidden shadow-lg">
+                        <img class="w-full h-full" src="img/travel photos.jpg" alt="Sign with many destinations">
+                    </div>
+                    <div class="text-center text-sm lg:text-xl">
+                        <h3 class="font-bold m-2 p-2 border-b border-gray-400">TravelBug is a convenient one-stop shop for all your travel planning needs</h3>
+                        <p></p>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="flex">
+                <!--plan your itinery-->
+                <div class="flex flex-col md:flex-row w-full m-2 p-2 bg-blue-50 rounded-md">
+                    <div class="rounded overflow-hidden shadow-lg">
+                        <img class="w-full h-full" src="img/travel ideas board.jpg" alt="Sign with many destinations">
+                    </div>
+                    <div class="text-center text-sm lg:text-xl">
+                        <h3 class="font-bold m-2 p-2 border-b border-gray-400">TravelBug is a convenient one-stop shop for all your travel planning needs</h3>
+                        <p></p>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </main>
+    
+    <footer class="block sm:flex justify-between bg-gray-500 text-gray-200 text-lg p-4" id="contact">
+        <div class="flex justify-center">
+            <h4 class="text-gray-700 sm:text-2xl font-semibold p-3 sm:p-2">Contact: </h4>
+            <ul class="flex flex-row ml-10">      
+                <li class="p-3 hover:bg-gray-600 transition duration-300">
+                    <a href="mailto:admin@travelbug.com.au">email</a>
+                </li>
+                <li class="p-3 sm:ml-10 hover:bg-gray-600 transition duration-300">
+                    <a href="tel:123-456-7890">phone</a>
+                </li>
+            </ul>
+        </div>
+        <div class="flex justify-center text-gray-700">
+            <span class="text-xs sm:text-sm p-2 mt-1"><i class="far fa-copyright"></i> </span>
+            <p class="text-sm lg:text-lg p-2 lg:p-1 mt-1">2021 TravelBug Inc.</p>
+        </div>    
+    </footer>
+    
+</body>
+</html>

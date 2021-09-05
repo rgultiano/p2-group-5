@@ -1,7 +1,5 @@
 const router = require('express').Router();
 const { User, UserAuth, Trip, Destination} = require('../models');
-const apiRoutes = require('./api');
-const apiRoutes = require('./curator');
 const { withAuth } = require('../utils/auth');
 
 // render homepage as index

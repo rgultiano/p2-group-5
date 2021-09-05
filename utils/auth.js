@@ -13,6 +13,15 @@ module.exports = {
       return;
 
   },
+  curatorWithAuth: (req, res, next) => {
+    if (!req.session.curator_logged_in) {
+      const uriReferrer = `?return_location=${encodeURIComponent(req.url)}`;
+      res.redirect(`/curator/login${uriReferrer}`);
+    } else {
+      res.locals.curator_sess_user_id = req.session.curator_user_id;
+      next();
+    }
+  },
   withAuth: (req, res, next) => {
     if (!req.session.logged_in) {
       const uriReferrer = `?return_location=${encodeURIComponent(req.url)}`;
@@ -34,5 +43,16 @@ module.exports = {
       
       next();
       return;
+  },
+  curatorAPIAuth: (req, res, next) => {
+    if(!req.session.curator_logged_in)
+      {
+        res.status(401).json({message: "You are unauthorized to access this resource!"});
+        return;
+      }
+      
+      next();
+      return;
   }
+
 };

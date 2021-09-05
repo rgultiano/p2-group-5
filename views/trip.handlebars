@@ -16,62 +16,37 @@
     {{#if curate_view}}
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
     {{/if}}
+    {{#if isCuratorRoute}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
+    {{/if}}
+    
     {{/content}}
     <div class="title py-4 pl-2">
-    <h2 class="text-2xl font-bold leading-7"><span id="trip_name" spellcheck="false" contenteditable="true">{{#if trip.id}}{{trip.name}}{{else}}My New Trip...{{/if}}</span>&nbsp;<i class="text-sm far fa-edit"></i></h2>
+    <h2 class="text-2xl font-bold leading-7"><span id="trip_name" spellcheck="false" {{#if isCuratorRoute}}{{else}}contenteditable="true"{{/if}}>{{#if trip.id}}{{trip.name}}{{else}}My New Trip...{{/if}}</span>{{#if isCuratorRoute}}{{else}}&nbsp;<i class="text-sm far fa-edit"></i>{{/if}}</h2>
     </div>
+    {{#if isCuratorRoute}}
+        {{> trip_curator_quote_form }}
+        {{> trip_user_curate_form}}
+    {{/if}}
     {{#if curate_view}}
-    <div class="curate-view">
-        <form class="curate-form bg-blue-200 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <h3 class="text-xl mb-2 font-bold">Curation Form</h3>
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="curate_group">
-                    Group Size
-                </label>
-                <input class="shadow bg-white appearance-none border rounded w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="curate_group" type="text" placeholder="# people">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="curate_origin">
-                    Departure from
-                </label>
-                <input class="shadow bg-white appearance-none border rounded w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="curate_origin" type="text" placeholder="City you will depart from">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="curate_departure">
-                    Departure date
-                </label>
-                <input class="shadow bg-white appearance-none border rounded w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="curate_departure" type="text" placeholder="dd/mm/yyyy">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="curate_return">
-                    Return date
-                </label>
-                <input class="shadow bg-white appearance-none border rounded w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="curate_return" type="text" placeholder="dd/mm/yyyy">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="curate_notes">
-                    Notes for Curators:
-                </label>
-                <textarea class="shadow bg-white appearance-none border rounded w-full resize-y h-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="curate_notes" type="text" placeholder="Notes..."></textarea>
-            </div>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                Submit
-            </button>
-        </form>
-    </div>
+        {{> trip_user_curate_form}}
     {{/if}}
     <div class="content">
         <section class="tripCreatorSec" id="tripCreatorSec">
             <div class="tripCreator" id="tripCreator">
+        {{#if isCuratorRoute}}
+        {{else}}
                 <div class="inputSec">
                     <input class="input" type="text" placeholder="Add a city..." id="add">
                     <button class="addBtn" onclick="getSearch()" id="submit"><i class="fas fa-plus"></i></button>
                 </div>
+        {{/if}} 
             </div>
-            <div class="saveBtnWrap">
+        {{#if isCuratorRoute}}
+        {{else}}            <div class="saveBtnWrap">
                 <button class="saveBtn" onclick="saveData()"><i class="fas fa-save"></i></button>
             </div>
-    
+        {{/if}} 
         </section>
 
         <section class="mapPreview" id="mapPreview">
@@ -90,6 +65,10 @@
     {{#if curate_view}}
         <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
         <script src="/js/curate.js"></script>
+    {{/if}}
+    {{#if isCuratorRoute}}
+        <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+        <script src="/js/curator.js"></script>
     {{/if}}
     <script    
       src="https://maps.googleapis.com/maps/api/js?key={{ENV.GOOGLE_API}}&callback=initMap&libraries=&v=weekly"

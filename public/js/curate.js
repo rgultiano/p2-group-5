@@ -31,6 +31,7 @@ const retPicker = new Pikaday({ field: document.getElementById('curate_return'),
     },
 });
 
+
 const curateFormHandler = async (event) => {
     event.preventDefault();
 
@@ -58,7 +59,3 @@ const curateFormHandler = async (event) => {
 }
 
 let curate_mode = true;
-
-document
-.querySelector('.curate-form')
-.addEventListener('submit', curateFormHandler);

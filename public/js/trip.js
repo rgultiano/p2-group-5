@@ -6,6 +6,10 @@ var coor = [];
 var polyCoor = [];
 const delDests = [];
 
+if(typeof (curate_mode) === 'undefined'){
+  var curate_mode = false;
+}
+
 // Tried using Jquery to allow for 'enter' to register as 'click'. Doesn't work :(
 $("#add").keyup(function(event) {
   if (event.keyCode === 13) {
@@ -21,10 +25,44 @@ function init(){
     if (evt.keyCode === 13) {
         evt.preventDefault();
     }
-});
+  });
+
+  if(curate_mode){
+    //insert functions if curate mode
+    document
+    .querySelector('.curate-form')
+    .addEventListener('submit', curateFormHandler);
+  }
+
+  if(isCurate){
+    document.
+    querySelector('.quote-form')
+    .addEventListener('submit', quoteFormHandler)
+  }
+
+  if(isCurate){
+    const quoteValidPicker = new Pikaday({ field: document.getElementById('quote_valid'), format: 'DD/MM/YYYY',
+      toString(date, format) {
+          // you should do formatting based on the passed format,
+          // but we will just return 'D/M/YYYY' for simplicity
+          let dd = date.getDate();
+          let mm = date.getMonth() + 1;
+          const year = date.getFullYear();
+          if (dd < 10) {
+              dd = '0' + dd;
+          }
+          if (mm < 10) {
+              mm = '0' + mm;
+          }
+          return `${dd}/${mm}/${year}`;
+      },
+      });
+  } 
 }
+
 async function loadTrip(trip_id){
-  const response = await fetch(`/api/users/${user_id}/trips/${trip_id}`, {
+  const uri = isCurate ? `/api/curator/trips/${trip_id}` : `/api/users/${user_id}/trips/${trip_id}`
+  const response = await fetch(uri, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
     credentials: "same-origin",
@@ -84,15 +122,21 @@ function addCityCard(id, destination_name, notes, db_id) {
   elCard.setAttribute('id', `${id}_card`);
   elCard.classList.add('card');
 
-  elCard.innerHTML += `
-    <div class="cardHeader">
-        <button class="deleteBtn" id="${id}_deleteCard" onclick="deleteCard(this${db_id ? ", '" + db_id + "'": ''})"><i class="far fa-trash-alt"></i></button>
+  let html = `
+    <div class="cardHeader">`
+    
+    html += isCurate ? '' : `
+        <button class="deleteBtn" id="${id}_deleteCard" onclick="deleteCard(this${db_id ? ", '" + db_id + "'": ''})"><i class="far fa-trash-alt"></i></button>`;
+
+    html +=    `
         <input type="hidden" id="${id}_db_id" value="${db_id ? db_id : ''}">
+        <input ${isCurate ? ' readonly ' : ''}class="header3" type="text" name="title" id="${id}_title" value="${destination_name}">
     </div>  
     <div class="cardBody">
-        <input class="header3" type="text" name="title" id="${id}_title" value="${destination_name}">
-        <textarea class="tripEntry" placeholder="..." cols='35' rows='10' id='${id}_tripEntry'>${notes ? notes : ''}</textarea>
+        <textarea ${isCurate ? ' readonly ' : ''}class="tripEntry" placeholder="..." cols='35' rows='10' id='${id}_tripEntry'>${notes ? notes : ''}</textarea>
     </div>`;
+
+    elCard.innerHTML += html
     listContent.appendChild(elCard);
 
 }
@@ -189,8 +233,8 @@ async function saveData() {
     //add additional fields as they are implemented
   };
   console.log(trip);
-  console.log('uri', `/api/users/${user_id}/trips${trip_id ? '/' + trip_id : ''}`)
-  const response = await fetch(`/api/users/${user_id}/trips${trip_id ? '/' + trip_id : ''}`, {
+  const uri =  `/api/users/${user_id}/trips${trip_id ? '/' + trip_id : ''}`
+  const response = await fetch(uri, {
     method: "POST",
     body: JSON.stringify(trip),
     headers: { "Content-Type": "application/json" },

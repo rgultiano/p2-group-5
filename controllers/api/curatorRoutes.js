@@ -1,6 +1,7 @@
 const router = require('express').Router();
-const { User, UserAuth, Trip, Destination} = require('../../models');
+const { Quote, User, UserAuth, Trip, Destination} = require('../../models');
 const { userAPIAuth, curatorAPIAuth } = require('../../utils/auth');
+const { ddmmyyyyToDate } = require('../../utils/helpers');
 const sequelize = require('../../config/connection');
 
 router.post('/auth', async (req, res) => {
@@ -86,20 +87,19 @@ router.get('/trips/:trip_id', curatorAPIAuth, async (req, res) =>{
 
 
 router.post('/trips/:trip_id/quote', curatorAPIAuth, async (req, res) =>{
-  try{
     const {amount, valid_until, booking_details} = req.body;
+
+    console.log('#############');
+    console.log(ddmmyyyyToDate(valid_until));
     const newQuote = await Quote.create({
       amount,
-      valid_until,
+      valid_until: ddmmyyyyToDate(valid_until),
       booking_details,
-      trip_id,
+      trip_id: req.params.trip_id,
       curator_id: req.session.user_id
     });
 
     res.status(200).json({ id: newQuote.id });
-  } catch (err) {
-    res.status(500).json(err);
-  }
 });
 
 

@@ -22,6 +22,7 @@ User.hasMany(UserAuth, {
     Booking,
     Trip,
     Destination,
+    Quote
   };
 
   Destination.belongsTo(Trip, {

@@ -14,10 +14,10 @@ const quoteFormHandler = async (event) => {
 
     if(response.ok)
     {
-        alert('ok');
+        alert('Quote sent');
     }
     else{
-        alert('Error sending for curation');
+        alert('Error sending quote');
     }
 
 }

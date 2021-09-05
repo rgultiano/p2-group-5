@@ -9,10 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
 
-    <!-- All the required scripts -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="/js/trip.js"></script>
     {{#if curate_view}}
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
     {{/if}}
@@ -70,6 +66,10 @@
         <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
         <script src="/js/curator.js"></script>
     {{/if}}
+    <!-- All the required scripts -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="/js/trip.js"></script>
     <script    
       src="https://maps.googleapis.com/maps/api/js?key={{ENV.GOOGLE_API}}&callback=initMap&libraries=&v=weekly"
       async

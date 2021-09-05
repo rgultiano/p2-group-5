@@ -87,10 +87,9 @@ router.get('/trips/:trip_id', curatorAPIAuth, async (req, res) =>{
 
 
 router.post('/trips/:trip_id/quote', curatorAPIAuth, async (req, res) =>{
+  try{
     const {amount, valid_until, booking_details} = req.body;
 
-    console.log('#############');
-    console.log(ddmmyyyyToDate(valid_until));
     const newQuote = await Quote.create({
       amount,
       valid_until: ddmmyyyyToDate(valid_until),
@@ -100,6 +99,10 @@ router.post('/trips/:trip_id/quote', curatorAPIAuth, async (req, res) =>{
     });
 
     res.status(200).json({ id: newQuote.id });
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 

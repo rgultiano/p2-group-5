@@ -57,4 +57,4 @@ const curateFormHandler = async (event) => {
 
 }
 
-let curate_mode = true;
+var curate_mode = true;

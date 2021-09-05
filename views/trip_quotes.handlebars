@@ -1,5 +1,5 @@
     {{#content "title"}}    
-    <title>TravelBug - Home</title>
+    <title>TravelBug - Quotes</title>
     {{/content}}
         <!--Trip logged for curation-->
         <div>
@@ -19,20 +19,10 @@
                 <div class="w-full mx-5 lg:mx-10">
                       <div class="grid grid-cols-1 grid-rows-10 text-gray-700 text-sm med:text-base lg:text-lg italic mt-5">
                        <div class="px-5 py-2 mt-2 lg:mt-10">
-                            <h3 class="text-center font-bold text-base med:text-lg lg:text-xl lg:mb-2 pb-2 border-b border-gray-400">Sent Quotes</h3>
+                            <h3 class="text-center font-bold text-base med:text-lg lg:text-xl lg:mb-2 pb-2 border-b border-gray-400">Quotes</h3>
                             <div class="grid grid-cols-1 grid-rows-10 text-gray-700 text-sm med:text-base lg:text-lg italic mt-5">
-                                {{#each sent_quotes}}
-                                {{> home_trip_row}}
-                                {{/each}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 grid-rows-10 text-gray-700 text-sm med:text-base lg:text-lg italic mt-5">
-                        <div class="px-5 py-2 mt-2 lg:mt-10">
-                            <h3 class="text-center font-bold text-base med:text-lg lg:text-xl lg:mb-2 pb-2 border-b border-gray-400">Accepted Quotes</h3>
-                            <div class="grid grid-cols-1 grid-rows-10 text-gray-700 text-sm med:text-base lg:text-lg italic mt-5">
-                                {{#each accepted_cuates}}
-                                {{> home_trip_row}}
+                                {{#each trip_quotes}}
+                                {{> trip_quotes_row}}
                                 {{/each}}
                             </div>
                         </div>

@@ -33,3 +33,24 @@ User.hasMany(UserAuth, {
     foreignKey: 'trip_id',
     onDelete: 'CASCADE',
  });
+
+
+
+ Quote.belongsTo(Trip, {
+    foreignKey: 'trip_id',
+ });
+
+ Trip.hasMany(Quote, {
+    foreignKey: 'trip_id',
+    onDelete: 'CASCADE',
+ });
+
+ Quote.belongsTo(User, {
+    as: 'curator',
+    foreignKey: 'curator_id',
+ });
+
+ User.hasMany(Quote, {
+    foreignKey: 'curator_id',
+    onDelete: 'CASCADE',
+ });

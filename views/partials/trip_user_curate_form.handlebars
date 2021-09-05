@@ -1,0 +1,46 @@
+
+    <div class="curate-view">
+        <form class="curate-form bg-blue-200 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <h3 class="text-xl mb-2 font-bold">{{#if isCuratorRoute}}Details for Curator{{else}}Curation Form{{/if}}</h3>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="curate_group">
+                    Group Size
+                </label>
+                <input {{#if isCuratorRoute}}readonly value="{{trip.groupsize}}"{{/if}} class="{{#if isCuratorRoute}}bg-grey-100{{else}}shadow bg-white appearance-none border rounded w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline{{/if}}" id="curate_group" type="text" placeholder="# people">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="curate_origin">
+                    Departure from
+                </label>
+                <input {{#if isCuratorRoute}}readonly value="{{trip.origin}}"{{/if}} class="{{#if isCuratorRoute}}bg-grey-100{{else}}shadow bg-white appearance-none border rounded w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline{{/if}}" id="curate_origin" type="text" placeholder="City you will depart from">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="curate_departure">
+                    Departure date
+                </label>
+                <input autocomplete="false" {{#if isCuratorRoute}}readonly value="{{trip.departure_date}}"{{/if}} class="{{#if isCuratorRoute}}bg-grey-100{{else}}shadow bg-white appearance-none border rounded w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline{{/if}}" id="curate_departure" type="text" placeholder="dd/mm/yyyy">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="curate_return">
+                    Return date
+                </label>
+                <input autocomplete="false" {{#if isCuratorRoute}}readonly value="{{trip.return_date}}"{{/if}} class="{{#if isCuratorRoute}}bg-grey-100{{else}}shadow bg-white appearance-none border rounded w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline{{/if}}" id="curate_return" type="text" placeholder="dd/mm/yyyy">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="curate_notes">
+                    Notes for Curators:
+                </label>
+                {{#if isCuratorRoute}}
+                <p class="bg-grey-100" id="curate_notes">{{trip.notes}}</p>
+                {{else}}
+                <textarea class="shadow bg-white appearance-none border rounded w-full resize-y h-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="curate_notes" type="text" placeholder="Notes..."></textarea>
+                {{/if}}
+            </div>
+        {{#if isCuratorRoute}}
+        {{else}}
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                Submit
+            </button>
+        {{/if}}
+        </form>
+    </div>

@@ -3,12 +3,8 @@
     border-radius: 10px;
 }
 
-h1, h2, h3, p, input, textarea, a {
+h2, h3, p, input, textarea {
     font-family: 'Noto Sans JP', sans-serif;
-}
-
-h1 {
-    font-size: 30px;
 }
 
 h2 {

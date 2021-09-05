@@ -19,12 +19,16 @@ Trip.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    notes: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     departure_date: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     return_date: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     completed_dt: {

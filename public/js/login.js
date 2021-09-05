@@ -8,7 +8,7 @@ const loginFormHandler = async (event) => {
   
     if (email && password) {
       // Send the e-mail and password to the server
-      const response = await fetch('/api/users/auth', {
+      const response = await fetch(isCurate ? '/api/curator/auth': '/api/users/auth', {
         method: 'POST',
         body: JSON.stringify({ email, password, type: "email"}),
         headers: { 'Content-Type': 'application/json' },
@@ -27,6 +27,8 @@ const loginFormHandler = async (event) => {
 
             // display the error message
             document.querySelector('.login-error-message').innerText = message;
+        } else if(response.status == 403 && isCurate){
+          location.replace('/curator/signup');
         } else {
             // display the error message
             document.querySelector('.login-error-message').innerText = "Unexpected error! Please try again later.";

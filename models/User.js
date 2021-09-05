@@ -24,6 +24,10 @@ User.init(
       allowNull: false,
       defaultValue: "U001",
     },
+    stripe_account: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     active: { type: DataTypes.BOOLEAN, defaultValue: true },
     email: { type: DataTypes.STRING, allowNull: false },
     created_dt: {

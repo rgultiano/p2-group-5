@@ -4,6 +4,7 @@ const UserAuth = require('./UserAuth');
 const Booking = require('./Booking');
 const Trip = require('./Trip');
 const Destination = require('./Destination');
+const Quote = require('./Quote');
 
 UserAuth.belongsTo(User, {
     foreignKey: 'user_id',

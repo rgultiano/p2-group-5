@@ -42,7 +42,11 @@ Quote.init(
     payment_id: {
       type: DataTypes.STRING,
       allowNull: true,
-      primaryKey: false,
+      autoIncrement: false,
+    },
+    booking_details: {
+      type: DataTypes.STRING,
+      allowNull: true,
       autoIncrement: false,
     },
   },

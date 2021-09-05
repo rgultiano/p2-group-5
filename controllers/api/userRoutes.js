@@ -275,4 +275,5 @@ router.post('/:id/trips/:trip_id/curate', userAPIAuth, async (req, res) =>{
 });
 
 
+
 module.exports = router;

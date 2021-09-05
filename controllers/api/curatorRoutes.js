@@ -86,27 +86,20 @@ router.get('/trips/:trip_id', curatorAPIAuth, async (req, res) =>{
 
 
 router.post('/trips/:trip_id/quote', curatorAPIAuth, async (req, res) =>{
-  const {departure_date, return_date, groupsize, origin, notes} = req.body;
-  Trip.update(
-    {
-      status: 'awaiting_curation',
-      departure_date,
-      return_date,
-      groupsize,
-      origin,
-      notes
-    },
-    {
-      where: {
-        id: req.params.trip_id,
-        user_id: req.params.id
-      }
-    }
-  )
-    .then((updatedTrip) => {
-      res.json(updatedTrip);
-    })
-    .catch((err) => res.json(err));
+  try{
+    const {amount, valid_until, booking_details} = req.body;
+    const newQuote = await Quote.create({
+      amount,
+      valid_until,
+      booking_details,
+      trip_id,
+      curator_id: req.session.user_id
+    });
+
+    res.status(200).json({ id: newQuote.id });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 

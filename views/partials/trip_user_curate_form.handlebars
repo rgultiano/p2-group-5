@@ -18,13 +18,13 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="curate_departure">
                     Departure date
                 </label>
-                <input {{#if isCuratorRoute}}readonly value="{{trip.departure_date}}"{{/if}} class="{{#if isCuratorRoute}}bg-grey-100{{else}}shadow bg-white appearance-none border rounded w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline{{/if}}" id="curate_departure" type="text" placeholder="dd/mm/yyyy">
+                <input autocomplete="false" {{#if isCuratorRoute}}readonly value="{{trip.departure_date}}"{{/if}} class="{{#if isCuratorRoute}}bg-grey-100{{else}}shadow bg-white appearance-none border rounded w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline{{/if}}" id="curate_departure" type="text" placeholder="dd/mm/yyyy">
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="curate_return">
                     Return date
                 </label>
-                <input {{#if isCuratorRoute}}readonly value="{{trip.return_date}}"{{/if}} class="{{#if isCuratorRoute}}bg-grey-100{{else}}shadow bg-white appearance-none border rounded w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline{{/if}}" id="curate_return" type="text" placeholder="dd/mm/yyyy">
+                <input autocomplete="false" {{#if isCuratorRoute}}readonly value="{{trip.return_date}}"{{/if}} class="{{#if isCuratorRoute}}bg-grey-100{{else}}shadow bg-white appearance-none border rounded w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline{{/if}}" id="curate_return" type="text" placeholder="dd/mm/yyyy">
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="curate_notes">

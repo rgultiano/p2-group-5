@@ -13,22 +13,35 @@
 
     <body class="text-gray-600 font-main">
             
-            <header class="md:flex justify-between bg-blue-100"> 
-                <div class="flex flex-col sm:flex-row text-4xl sm:text-5xl md:text-6xl font-bold p-3 sm:mb-1"><!--Logo-->
+        <header class="flex flex-col md:flex-row justify-between bg-blue-100"> 
+            <div>
+                <div class="flex flex-col lg:flex-row text-4xl sm:text-5xl md:text-6xl font-bold p-3 sm:mb-1"><!--Logo-->
                     <div class="flex flex-row"> 
                         <h1>TravelBug</h1>
                         <img src="img/flying beetle.png" class="h-8 md:h-12 mt-1">
                     </div>
-                    <div class="text-left md:text-center text-xl italic sm:text-2xl md:text-3xl font-bold sm:mt-5"><!--Sub heading-->
+                    <div class="text-left lg:text-center text-xl italic sm:text-2xl md:text-3xl font-bold ml-1 lg:mt-5"><!--Sub heading-->
                         <h2>Profile Page</h2>
                     </div>
                 </div>
-                <div class="sm:mt-5"><!--logged in message-->
-                    <div class="font-bold text-sm sm:text-base lg:text-md pb-2 sm:pt-2 px-4 mr-5 sm:mt-3">
+                <div class=""><!--logged in message-->
+                    <div class="font-bold text-sm sm:text-base lg:text-md text-red-900 pb-2 px-4 mr-5">
                         Logged in as:  <span class="font-light italic">userName</span>
                     </div> 
                 </div>
-            </header>
+            </div>
+    
+            <nav><!--nav menu-->  
+                <div class="menu md:p-4 text-base lg:text-lg bg-blue-100 text-blue-900">
+                    <ul class="flex flex-row font-semibold">
+                        <li class="active underline ml-5 md:m-5"><a href="profilePage.html" class="md:p-2 hover:bg-blue-200 transition duration-300">Home</a></li>
+                        <li class="ml-5 md:m-5"><a href="about.html" class="md:p-2 hover:bg-blue-200 transition duration-300">About</a></li>
+                        <li class="ml-5 md:m-5"><a href="" class="md:p-2 hover:bg-blue-200 transition duration-300">Logout</a></li>
+                    </ul>
+                </div>
+            </nav>    
+            
+        </header>  
                
             
             <main class="flex flex-col bg-blue-500 p-5">
@@ -171,20 +184,23 @@
     
             </main>    
             
-            <footer class="bg-gray-500 text-gray-200 text-lg">
-                    <ul class="flex flex-row ml-10">
-                        <li class="p-4">
-                            <a href="#">
-                                <span>About</span>
-                            </a>
+            <footer class="block sm:flex justify-between bg-gray-500 text-gray-200 text-lg p-4" id="contact">
+                <div class="flex justify-center">
+                    <h4 class="text-gray-700 sm:text-2xl font-semibold p-3 sm:p-2">Contact: </h4>
+                    <ul class="flex flex-row ml-10">      
+                        <li class="p-3 hover:bg-gray-600 transition duration-300">
+                            <a href="mailto:admin@travelbug.com.au">email</a>
                         </li>
-                        <li class="p-4">
-                            <a href="#">
-                                <span>Contact</span>
-                            </a>
+                        <li class="p-3 sm:ml-10 hover:bg-gray-600 transition duration-300">
+                            <a href="tel:123-456-7890">phone</a>
                         </li>
-                    </ul>        
-            </footer>
+                    </ul>
+                </div>
+                <div class="flex justify-center text-gray-700">
+                    <span class="text-xs sm:text-sm p-2 mt-1"><i class="far fa-copyright"></i> </span>
+                    <p class="text-sm lg:text-lg p-2 lg:p-1 mt-1">2021 TravelBug Inc.</p>
+                </div>    
+        </footer>
             
             
         </div>

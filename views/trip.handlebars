@@ -24,6 +24,11 @@
         {{> trip_curator_quote_form }}
         {{> trip_user_curate_form}}
     {{/if}}
+    {{#if viewQuote}}
+        {{#with quote}}
+            {{> trip_curator_quote_form }}
+        {{/with}}
+    {{/if}}
     {{#if curate_view}}
         {{> trip_user_curate_form}}
     {{/if}}

@@ -251,7 +251,7 @@ router.delete('/:id/trips/:trip_id', userAPIAuth, (req, res) => {
 });
 
 router.post('/:id/trips/:trip_id/curate', userAPIAuth, async (req, res) =>{
-  const {departure_date, return_date, groupsize, origin, booking_details} = req.body;
+  const {departure_date, return_date, groupsize, origin, notes} = req.body;
   Trip.update(
     {
       status: 'awaiting_curation',
@@ -259,7 +259,7 @@ router.post('/:id/trips/:trip_id/curate', userAPIAuth, async (req, res) =>{
       return_date,
       groupsize,
       origin,
-      notes: booking_details,
+      notes
     },
     {
       where: {

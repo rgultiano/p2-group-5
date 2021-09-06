@@ -7,6 +7,7 @@ router.get('/', async (req, res) => {
   if (req.session.curator_logged_in) {
     console.log({user_id: req.session.user_id});
     res.locals.sess_user_id = req.session.user_id;
+    res.locals.curator_mode = true;
     const tripData = await Trip.findAll( {
       include: [{ model: Destination}],
       where: {
@@ -31,17 +32,19 @@ router.get('/', async (req, res) => {
 router.get('/login', (req, res) => {
 
   res.render('login', {isCuratorRoute: true});
+  res.locals.curator_mode = true;
 });
 
 router.get("/signup", (req, res) => {
   res.render("curator_signup", {isCuratorRoute: true});
+  res.locals.curator_mode = true;
 });
 
-router.get('/onboard', withAuth, (req, res) => {
+router.get('/onboard', withAuth, async (req, res) => {
   if (req.session.logged_in) {
-    User.update(
+    await User.update(
       {
-        rol: 'U001'
+        role: 'C001'
         // trip_id: trip_id,
       },
       {
@@ -52,6 +55,7 @@ router.get('/onboard', withAuth, (req, res) => {
       
       req.session.curator_user_id = req.session.user_id;
       req.session.curator_logged_in = true;
+      res.locals.curator_mode = true;
       res.redirect('/curator/')
   } else {
       res.status(404).end();
@@ -68,7 +72,7 @@ router.get("/trip/:id", curatorWithAuth, async (req, res) => {
     order:[['destinations', 'order', 'ASC']],
   });
   res.locals.trip_id = req.params.id;
-  res.locals.trip = 
+  res.locals.curator_mode = true;
   console.log(tripData.get({plain:true}));
   res.render("trip", {isCuratorRoute: true, trip: tripData.get({plain:true})});
 });
@@ -83,7 +87,7 @@ router.get("/trip/:id/quote", curatorWithAuth, async (req, res) => {
   });
   res.locals.trip_id = req.params.id;
   res.locals.curate_view = true;
-  res.locals.trip = 
+  res.locals.curator_mode = true;
   console.log(tripData.get({plain:true}));
   res.render("trip", {isCuratorRoute: true, isQuote: true, trip: tripData.get({plain:true})});
 });

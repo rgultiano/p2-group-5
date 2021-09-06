@@ -38,7 +38,7 @@ const curateFormHandler = async (event) => {
     const origin = document.getElementById('curate_origin').value;
     const departure_date = document.getElementById('curate_departure').value;
     const return_date = document.getElementById('curate_return').value;
-    const notes = document.getElementById('curate_notes').innerText;
+    const notes = document.getElementById('curate_notes').value;
 
 
     const response = await fetch(`/api/users/${user_id}/trips/${trip_id}/curate`, {
@@ -49,7 +49,7 @@ const curateFormHandler = async (event) => {
 
     if(response.ok)
     {
-        alert('ok');
+        location.replace('/');
     }
     else{
         alert('Error sending for curation');

@@ -40,11 +40,11 @@ router.get("/signup", (req, res) => {
   res.locals.curator_mode = true;
 });
 
-router.get('/onboard', withAuth, (req, res) => {
+router.get('/onboard', withAuth, async (req, res) => {
   if (req.session.logged_in) {
-    User.update(
+    await User.update(
       {
-        rol: 'U001'
+        role: 'C001'
         // trip_id: trip_id,
       },
       {

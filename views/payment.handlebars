@@ -17,6 +17,7 @@
     </div>
 </div>
 {{#content "scripts"}}
+    <script type="text/javascript">const publishable_key = '{{stripe_pk}}'</script>
     <script src="https://js.stripe.com/v3/"></script>
     <script src="/js/payment.js"></script>
 {{/content}}

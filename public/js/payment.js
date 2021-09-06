@@ -1,9 +1,9 @@
-var stripe = Stripe('pk_test_L1f0e3XAzjsG7jtp4uN7L9ql');
+var stripe = Stripe(publishable_key);
 var elements = stripe.elements();
 
 
 const form = document.getElementById('payment-form');
-const card = elements.create("card", { });
+const card = elements.create("card", {});
 
 // Set up Stripe.js and Elements to use in checkout form
 var elements = stripe.elements();

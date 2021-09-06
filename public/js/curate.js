@@ -49,7 +49,7 @@ const curateFormHandler = async (event) => {
 
     if(response.ok)
     {
-        alert('ok');
+        location.replace('/');
     }
     else{
         alert('Error sending for curation');

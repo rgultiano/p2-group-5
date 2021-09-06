@@ -170,6 +170,7 @@ router.get("/trip/:id/quotes/:quote_id/pay", withAuth, async (req, res) => {
             ...quoteData.get({plain: true}),
             formattedAmount:  formatter.format(quoteData.get({plain: true}).amount)
             },
+    stripe_pk: process.env.STRIPE_PUBLISHABLE_KEY,
   });
 
 

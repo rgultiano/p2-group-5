@@ -1,0 +1,23 @@
+<div class="overflow-hidden px-3 py-10 bg-blue-400 flex justify-center">
+    <div class="w-full max-w-xs ">
+        <form class="payment-form bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <h3 class="text-3xl mb-4">Payment for {{trip.name}}</h3>
+
+            <div class="font-bold">Payment amount</div>
+            <div class="payment-amount mb-4">{{quote.formattedAmount}}</div>
+            <div class="mb-2">Card Details</div>
+            <div class="mb-2 bg-blue-100 border-solid border-width-2 border-black rounded p-2"id="card-element"></div>
+            <div id="card-errors" class="text-sm text-red-500" role="alert"></div> 
+            <div class="flex justify-center">
+                <button class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    Pay {{quote.formattedAmount}}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{{#content "scripts"}}
+    <script type="text/javascript">const publishable_key = '{{stripe_pk}}'</script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="/js/payment.js"></script>
+{{/content}}

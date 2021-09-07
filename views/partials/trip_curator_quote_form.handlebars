@@ -1,0 +1,47 @@
+
+<div class="quote-view">
+    <form class="quote-form bg-blue-200 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <h3 class="text-xl mb-2 font-bold">Quotation Form</h3>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="quote_amount">
+                Quote Amount
+            </label>
+            {{#if viewQuote}} 
+                <span>{{formattedAmount}}</span>
+            {{else}} 
+            <input class="shadow bg-white appearance-none border rounded w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="quote_amount" type="text" placeholder="$ amount">
+            {{/if}}
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="quote_valid">
+                Valid Until
+            </label>
+            {{#if viewQuote}} 
+                <span>{{valid_until}}</span>
+            {{else}} 
+            <input autocomplete="false" class="shadow bg-white appearance-none border rounded w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="quote_valid" type="text" placeholder="dd/mm/yyyy">
+            {{/if}}
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="quote_details">
+                Booking Details:
+            </label>
+            {{#if viewQuote}} 
+                <p>{{booking_details}}</p>
+            {{else}} 
+            <textarea class="shadow bg-white appearance-none border rounded w-full resize-y h-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="quote_details" type="text" placeholder="Notes..."></textarea>
+            {{/if}}
+        </div>
+            {{#if viewQuote}} 
+                <div class="flex justify-center">
+                    <a href="/trip/{{trip_id}}/quotes/{{id}}/pay" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" >
+                        Accept and Pay Quote {{paymentAmount}}
+                    </a>
+                </div>
+            {{else}} 
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+            Send Quote
+        </button>
+        {{/if}}
+    </form>
+</div>

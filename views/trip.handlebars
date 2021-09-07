@@ -1,0 +1,82 @@
+    {{#content "title"}}    
+    <title>TravelBug - Trip</title>
+    {{/content}}
+    {{#content "head"}}    
+    <!-- All the stylesheets -->
+    <link rel="stylesheet" href="/css/customStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+
+    {{#if curate_view}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
+    {{/if}}
+    {{#if isCuratorRoute}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
+    {{/if}}
+    
+    {{/content}}
+    <div class="title py-4 pl-2">
+    <h2 class="text-2xl font-bold leading-7"><span id="trip_name" spellcheck="false" {{#if isCuratorRoute}}{{else}}contenteditable="true"{{/if}}>{{#if trip.id}}{{trip.name}}{{else}}My New Trip...{{/if}}</span>{{#if isCuratorRoute}}{{else}}&nbsp;<i class="text-sm far fa-edit"></i>{{/if}}</h2>
+    </div>
+    {{#if isCuratorRoute}}
+        {{> trip_curator_quote_form }}
+        {{> trip_user_curate_form}}
+    {{/if}}
+    {{#if viewQuote}}
+        {{#with quote}}
+            {{> trip_curator_quote_form }}
+        {{/with}}
+    {{/if}}
+    {{#if curate_view}}
+        {{> trip_user_curate_form}}
+    {{/if}}
+    <div class="content">
+        <section class="tripCreatorSec" id="tripCreatorSec">
+            <div class="tripCreator" id="tripCreator">
+        {{#if isCuratorRoute}}
+        {{else}}
+                <div class="inputSec">
+                    <input class="input" type="text" placeholder="Add a city..." id="add">
+                    <button class="addBtn" onclick="getSearch()" id="submit"><i class="fas fa-plus"></i></button>
+                </div>
+        {{/if}} 
+            </div>
+        {{#if isCuratorRoute}}
+        {{else}}            <div class="saveBtnWrap">
+                <button class="saveBtn" onclick="saveData()"><i class="fas fa-save"></i></button>
+            </div>
+        {{/if}} 
+        </section>
+
+        <section class="mapPreview" id="mapPreview">
+            <div id="map"></div>
+        </section>
+    </div>
+    {{#content "scripts"}}
+    <script type="text/javascript">
+        const user_id = '{{sess_user_id}}';
+        {{#if trip.id}}
+        const trip_id = '{{trip.id}}';
+        {{else}}
+        let trip_id = null;
+        {{/if}};
+    </script>
+    {{#if curate_view}}
+        <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+        <script src="/js/curate.js"></script>
+    {{/if}}
+    {{#if isCuratorRoute}}
+        <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+        <script src="/js/curator.js"></script>
+    {{/if}}
+    <!-- All the required scripts -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="/js/trip.js"></script>
+    <script    
+      src="https://maps.googleapis.com/maps/api/js?key={{ENV.GOOGLE_API}}&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+    {{/content}}
